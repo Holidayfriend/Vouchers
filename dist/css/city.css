@@ -1,0 +1,419 @@
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 40px; /* Left on desktop */
+    z-index: 1;
+    height: 60px; /* Adjust the height as needed */
+}
+.logo_footer {
+
+    height: 50px; /* Adjust the height as needed */
+}
+.language-dropdown {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* Move language dropdown to the left */
+
+}
+.language-dropdown_mobile {
+    display: none;
+}
+
+li {
+    display: flex;
+    align-items: center;
+
+
+}
+
+.white-bg{
+    background: white;
+}
+.description_is{
+    padding-left: 220px;
+    padding-right: 220px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+.faq_is{
+    padding-left: 270px;
+    padding-right: 270px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+}
+.footer_is{
+    background-color: #334155;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.description_image{
+    width: 100%;
+
+}
+
+/* Custom CSS to add a red background to the active_this "All" category button */
+.active_this {
+    background: #ECEEF2;
+    color: white;
+    border-radius: 30px;
+}
+/* Custom CSS for benefit div */
+.benefit {
+    height: 450px;
+    background-size: cover;
+    position: relative;
+    border-radius: 20px; /* Top-left and top-right have border-radius, bottom-left and bottom-right are square */
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Style for the container div that holds h2, small-line, and benefit-description */
+.bottom-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0)); /* Black to White gradient from bottom to top */
+    padding: 10px;
+    text-align: center; /* Center the content horizontally */
+    border-radius: 0 0 20px 20px; /* Rounded corners at the bottom */
+}
+
+/* Style for the h2 element */
+.benefit h2 {
+    color: white;
+    margin: 0;
+}
+
+/* Style for the horizontal line */
+.small-line {
+    width: 20%; /* Adjust the width as needed */
+    border: 1px solid white; /* Line style */
+    margin: 10px auto; /* Center the line horizontally */
+}
+
+/* Style for the span at the bottom of the benefit div */
+.benefit-description {
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.top-right-span {
+    margin-top: 12px;
+    margin-right: 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #F1BE26;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Style for the "Load More" button */
+#loadMoreButton {
+    margin-top: 20px;
+    background: #6C8B9D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.category_heading{
+    margin-left: 270px;
+    margin-right: 270px;
+}
+.whole-bg{
+    background: #F9FAFB;
+}
+.dark_blue{
+    color: #334155;
+}
+.dark_blue_bg{
+    background : #334155;
+    color:white;
+}
+.bold_is{
+    font-weight: 600;
+}
+.cat_size{
+    font-size: 16px;
+}
+.cat_title{
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+}
+.cat_title_sub{
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+.des_title_size{
+    font-size: 38px;
+}
+.description_div{
+
+    padding-left: 30px;
+    padding-right: 100px;
+}
+.text_just{
+    font-size: 14px;
+    font-weight: 500;
+    text-align: justify;
+}
+.advantage_title{
+    color: #434E61;
+    font-weight: 700;
+    font-size: 38px;
+}
+.advantage_sub_title{
+    color: #434E61;
+    font-weight: 500;
+    font-size: 16px;
+}
+.col-lg-4, .col-sm-4, .col-md-4 {
+
+    text-align: right;
+}
+.faq-item {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+.faq-question {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between; /* Align the question and button */
+    align-items: center;
+    font-weight: 500;
+    font-size: 22px;
+    color: #434E61;
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    text-align: left;
+    font-weight: 400;
+    font-size: 16px;
+    color: #434E61;
+}
+.faq_title{
+    color: #434E61;
+    font-size: 30px;
+    font-weight: 700;
+}
+.faq_title_sub{
+    color: #434E61;
+    font-size: 16px;
+    font-weight: 500;
+}
+.faq_q_text{
+    font-weight: 500;
+    font-size: 22px;
+}
+.toggle-button {
+
+    color: black;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.icon_height_and_width{
+    height: 24px;
+    width: 24px;
+}
+.footer_line{
+    color: white;
+    font-weight: 500;
+}
+.footer_contact{
+    font-weight: 400;
+    font-size: 14px;
+}
+.footer_contact_main{
+    font-weight: 500;
+    font-size: 16px;
+}
+/* Desktop styles */
+@media (min-width: 768px) { /* Media query for desktop view */
+    .col-lg-8, .col-sm-8, .col-md-8 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Vertically center the text */
+
+    }
+}
+
+
+
+
+/* Styles for screens between 500px and 1150px */
+@media (min-width: 500px) and (max-width: 1150px) {
+    .logo {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40%; /* Decreased height */
+        height: 1.1%;
+    }
+}
+
+
+
+@media (max-width: 1200px) {
+    /* Updated styles for mobile view */
+    .footer_center{
+        text-align: center;
+    }
+    .footer_top_margen{
+        margin-top: 25px;
+    }    
+    .description_div{
+        margin-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .category_heading_mobile{
+        margin-left: 40px !important;
+        margin-right: 40px !important;
+    }
+    /* Center the logo horizontally in mobile view and decrease its size */
+    .logo {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40%; /* Decreased height */
+        height: 2.1%;
+    }
+
+    /* Add dropdown language selector to the top left in mobile view */
+    .language-dropdown_mobile {
+        display: block;
+        position: absolute;
+        top: 10px;
+        left: 1px;
+    }
+
+    /* Style the language dropdown text in mobile view */
+    .language-dropdown_mobile {
+        /*        position: relative;*/
+        z-index: 3; /* Set a higher z-index to ensure it's above the overlay */
+    }
+
+    .language-dropdown_mobile {
+        color: black; /* Set the text color to white */
+
+    }
+
+
+    .description_is {
+        padding-left: 10px;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    .mobile_align_center{
+        text-align: center;
+    }
+    .col-lg-8, .col-sm-8, .col-md-8 {
+        /*                    text-align: center;*/
+    }
+
+    .col-lg-4, .col-sm-4, .col-md-4 {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .faq_is{
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+    }
+    .model_top_margen{
+        margin-top: 15px;
+    } 
+}
+
+/* Custom Modal Header Styles */
+.custom-modal-header {
+    text-align: center;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+}
+
+.custom-modal-title {
+    font-size: 24px;
+    margin: 0;
+}
+
+.custom-subtitle {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.custom-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background-color: #6B8A9C;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.benefit_model_title{
+    color: #334155;
+    font-size: 24px;
+    font-weight: 700;
+}
+.benefit_model_sub_title{
+    color: #64748B;
+    font-size: 14px;
+    font-weight: 600;
+
+}
+.benefit_model_below_sub_title{
+    color: #64748B;
+    font-size: 13px;
+    font-weight: 600;
+
+}
+
+.benefit_model_below_title{
+    color: #64748B;
+    font-size: 16px;
+    font-weight: 600;
+
+}
+/* Custom CSS to make the image fill its parent div */
+.image-container {
+    text-align: center;
+    position: relative;
+    width: 100%; 
+
+}
+
+.image-container img {
+    max-width: 100%; /* Ensure the image width does not exceed the parent width */
+    min-width: 100%;
+    height: auto; /* Allow the height to adjust automatically */
+
+}
