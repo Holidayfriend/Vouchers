@@ -31,6 +31,33 @@ if ($result && $result->num_rows > 0) {
         }
     }
 }
+function sendEmail($to, $subject, $body, $fromName, $replyTo)
+{
+    $mail = new PHPMailer();
+    $mail->IsSMTP();
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = 'tls';
+    $mail->Host = "smtp.hostinger.com";
+    $mail->Port = 587;
+    $mail->IsHTML(true);
+    $mail->CharSet = 'UTF-8';
+    $mail->Username = "noreply@qualityfriend.solutions";
+    $mail->Password = 'Pakistan@143';
+    $mail->SetFrom("noreply@qualityfriend.solutions", $fromName);
+    $mail->AddReplyTo($replyTo, $fromName);
+    $mail->Subject = $subject;
+    $mail->Body = $body;
+    $mail->AddAddress($to);
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => false
+        )
+    );
+
+    return $mail->Send();
+}
 
 // Close database connection
 $conn->close();

@@ -254,13 +254,108 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                                         $current_uses = $row['current_uses'];
                                         $start_date = $row['start_date'];
                                         $end_date = $row['end_date'];
+                                        $end_date = $row['end_date'];
+                                        $what = $row['what'];
+                                        $voucher_id = $row['voucher_id'];
+                                        $category_id = $row['category_id'];
+
+                                        $what = $row['what'];
+
+                                        $promo_for = '';
+                                        if ($what == 'all') {
+
+                                            $promo_for = getTranslation('general_for_all', $lang);
+                                        } else if ($what == 'voucher') {
+
+
+
+                                            $sub_query = "SELECT * FROM `tbl_voucher` WHERE `id` = $voucher_id";
+                                            $sub_result = mysqli_query($conn, $sub_query);
+
+                                            // Check if query executed successfully
+                                            if ($sub_result) {
+                                                // Loop through the result set
+                                                while ($sub_row = mysqli_fetch_assoc($sub_result)) {
+                                                    $title = '';
+                                                    if ($lang == 'en') {
+
+                                                        if ($sub_row['title'] != "") {
+                                                            $title = $sub_row['title'];
+                                                        } else if ($sub_row['title_it'] != "") {
+                                                            $title = $sub_row['title_it'];
+                                                        } else if ($sub_row['title_de'] != "") {
+                                                            $title = $sub_row['title_de'];
+                                                        }
+                                                    } else if ($lang == 'it') {
+                                                        if ($sub_row['title_it'] != "") {
+                                                            $title = $sub_row['title_it'];
+                                                        } else if ($sub_row['title'] != "") {
+                                                            $title = $sub_row['title'];
+                                                        } else if ($sub_row['title_de'] != "") {
+                                                            $title = $sub_row['title_de'];
+                                                        }
+                                                    } else {
+                                                        if ($sub_row['title_de'] != "") {
+                                                            $title = $sub_row['title_de'];
+                                                        } else if ($sub_row['title'] != "") {
+                                                            $title = $sub_row['title'];
+                                                        } else if ($sub_row['title_it'] != "") {
+                                                            $title = $sub_row['title_it'];
+                                                        }
+                                                    }
+                                                }
+                                            } else {
+                                            }
+
+                                            $promo_for =   getTranslation('vouchers_based', $lang) . ' : ' . $title;
+                                        } else {
+
+                                            $sub_query = "SELECT * FROM `tbl_category` WHERE `id` = $category_id";
+                                            $sub_result = mysqli_query($conn, $sub_query);
+
+                                            // Check if query executed successfully
+                                            if ($sub_result) {
+                                                // Loop through the result set
+                                                while ($sub_row = mysqli_fetch_assoc($sub_result)) {
+                                                    if ($lang == 'en') {
+
+                                                        if ($sub_row['name'] != "") {
+                                                            $name = $sub_row['name'];
+                                                        } else if ($sub_row['name_it'] != "") {
+                                                            $name = $sub_row['name_it'];
+                                                        } else if ($sub_row['name_de'] != "") {
+                                                            $name = $sub_row['name_de'];
+                                                        }
+                                                    } else if ($lang == 'it') {
+                                                        if ($sub_row['name_it'] != "") {
+                                                            $name = $sub_row['name_it'];
+                                                        } else if ($sub_row['name'] != "") {
+                                                            $name = $sub_row['name'];
+                                                        } else if ($sub_row['name_de'] != "") {
+                                                            $name = $sub_row['name_de'];
+                                                        }
+                                                    } else {
+                                                        if ($sub_row['name_de'] != "") {
+                                                            $name = $sub_row['name_de'];
+                                                        } else if ($sub_row['name'] != "") {
+                                                            $name = $sub_row['name'];
+                                                        } else if ($sub_row['name_de'] != "") {
+                                                            $name = $sub_row['name_de'];
+                                                        }
+                                                    }
+                                                }
+                                            } else {
+                                            }
+                                            $promo_for =   getTranslation('category_based', $lang);
+                                             $promo_for =   getTranslation('vouchers_based', $lang) . ' : ' . $name;
+                                        }
 
 
 
 
 
 
-                                        ?>
+                                ?>
                                         <div class="col-lg-4 col-md-6 col-sm-12">
                                             <div onclick="toggleSelect(<?php echo $promo_code_id; ?>)"
                                                 id="<?php echo $promo_code_id; ?>" class="row single_div_io pointer">
@@ -292,6 +387,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                                                                 <?php echo date('Y-m-d', strtotime($start_date)); ?></span><br>
                                                             <span><b><?= getTranslation('end_date', $lang) ?>:</b>
                                                                 <?php echo date('Y-m-d', strtotime($end_date)); ?></span><br>
+                                                            <span><b><?php echo $promo_for ?></b></span><br>
 
                                                         </div>
                                                     </div>
@@ -299,7 +395,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                                             </div>
                                         </div>
 
-                                        <?php
+                                    <?php
                                     }
                                 } else {
                                     ?>
@@ -379,10 +475,6 @@ $totalRecords = $countResult->fetch_assoc()['total'];
 
 
     <script>
-
-
-
-
         var selectedIds = [];
 
         // Function to toggle the selection of a div by ID
@@ -392,7 +484,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                 if (div.classList.contains("selected")) {
                     div.classList.remove("selected");
                     // Remove ID from the selectedIds array
-                    selectedIds = selectedIds.filter(function (item) {
+                    selectedIds = selectedIds.filter(function(item) {
                         return item !== id;
                     });
                 } else {
@@ -408,6 +500,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                 $("#deleteButton").hide();
             }
         }
+
         function action(event, id, what, name) {
             event.stopPropagation(); // Prevent the outer div's click event
             var fd = new FormData();
@@ -423,7 +516,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                 data: fd,
                 processData: false,
                 contentType: false,
-                success: function (response) {
+                success: function(response) {
 
                     console.log(response);
                     if (what == 'DEACTIVE') {
@@ -444,8 +537,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                                 window.location.href = "hotel_vouchers.php";
                             }
                         });
-                    }
-                    else {
+                    } else {
                         Swal.fire({
                             type: 'error',
                             title: 'Oops...',
@@ -455,7 +547,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                     }
 
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.log(error);
                 },
             });
@@ -464,11 +556,11 @@ $totalRecords = $countResult->fetch_assoc()['total'];
 
 
         // JavaScript code for "Select All" checkbox functionality
-        $(document).ready(function () {
+        $(document).ready(function() {
 
 
             // AJAX request to delete selected rows
-            $("#deleteButton").click(function () {
+            $("#deleteButton").click(function() {
                 if (selectedIds.length === 0) {
                     alert("Please select at least one row to delete.");
                     return;
@@ -477,8 +569,12 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                 $.ajax({
                     type: "POST",
                     url: "utill/del.php",
-                    data: { selectedRows: selectedIds, base: 'promocodes', base_name: 'promo_code_id' },
-                    success: function (response) {
+                    data: {
+                        selectedRows: selectedIds,
+                        base: 'promocodes',
+                        base_name: 'promo_code_id'
+                    },
+                    success: function(response) {
                         // Display the response message from del.php (e.g., success or error message)
                         // After successful deletion, refresh the page
 
@@ -498,7 +594,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
 
 
                     },
-                    error: function () {
+                    error: function() {
                         alert("An error occurred while deleting selected rows.");
                     }
                 });
@@ -506,23 +602,22 @@ $totalRecords = $countResult->fetch_assoc()['total'];
         });
     </script>
     <script>
-
         function url_redirect(url) {
             // Redirect the user to the specified URL
             window.location.href = url;
         }
+
         function reset() {
             // Redirect the user to the specified URL
             window.location.href = 'city_benefit.php';
         }
-
     </script>
 
 
 
     <script>
         // JavaScript code for handling the search input
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Get the search input element
             var searchInput = $("#searchInput");
 
@@ -540,7 +635,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
             }
 
             // Handle changes in the search input
-            searchInput.on("input", function () {
+            searchInput.on("input", function() {
                 var searchTerm = searchInput.val();
                 updateUrl(searchTerm);
 
@@ -559,7 +654,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
     </script>
     <script>
         // JavaScript code for applying and resetting filters
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Get the filter form elements
             // JavaScript code for applying and resetting filters
             var filterForm = $("#filterForm");
@@ -568,7 +663,7 @@ $totalRecords = $countResult->fetch_assoc()['total'];
             var clearCityFilterButton = $("#clearCityFilter");
             var clearDateFilterButton = $("#clearDateFilter");
 
-            applyFilterButton.click(function () {
+            applyFilterButton.click(function() {
                 var filterStatus = filterForm.find('input[name="filterStatus"]:checked').val();
                 var cityFilter = filterForm.find('select[name="cityFilter"]').val();
                 var expiryFilter = filterForm.find('input[name="expiry"]').val();
@@ -595,16 +690,16 @@ $totalRecords = $countResult->fetch_assoc()['total'];
                 window.location.href = url;
             });
 
-            resetFilterButton.click(function () {
+            resetFilterButton.click(function() {
                 var url = window.location.href.split('?')[0];
                 window.location.href = url;
             });
 
-            clearCityFilterButton.click(function () {
+            clearCityFilterButton.click(function() {
                 filterForm.find('select[name="cityFilter"]').val('all');
             });
 
-            clearDateFilterButton.click(function () {
+            clearDateFilterButton.click(function() {
                 filterForm.find('input[name="expiry"]').val('');
                 applyFilters();
             });

@@ -136,13 +136,14 @@ $transactionID = $response['purchase_units'][0]['payments']['captures'][0]['id']
 // Show Success Page
 
 
-$sql = "SELECT a.first_name,a.last_name,a.email,a.phone,a.country,a.address,a.qr_code,a.quantity,a.total,a.voucher_id,a.valid_until,a.discount,
-a.`user_id`, a.`title`, a.`description`,a.`our_description`, a.`amount`, a.image as v_image,
-               b.name, b.hotel_name, b.hotel_website, b.language, b.image as hotel_image,c.code as p_code
+$sql = "SELECT a.first_name, a.last_name, a.email, a.phone, a.country, a.address, a.qr_code, a.quantity, a.total, a.voucher_id, a.valid_until, a.discount,
+               a.user_id, a.title, a.description, a.our_description, a.amount, a.image as v_image,
+               b.name, b.hotel_name, b.hotel_website, b.language, b.image as hotel_image, 
+               COALESCE(c.code, 'N/A') as p_code
         FROM `tbl_users_vouchers` AS a 
-        INNER JOIN `tbl_user` AS b ON a.`user_id` = b.`user_id` 
-          INNER JOIN `tbl_promocodes` AS c ON a.`promo_code_id` = c.`promo_code_id` 
-        WHERE a.`id` = ?";
+        INNER JOIN `tbl_user` AS b ON a.user_id = b.user_id 
+        LEFT JOIN `tbl_promocodes` AS c ON a.promo_code_id = c.promo_code_id 
+        WHERE a.id = ?";
 
 // Prepare statement
 $stmt = $conn->prepare($sql);
@@ -371,27 +372,201 @@ $promocode_text = $translations[$lang]['promocode'];
 
 
 $f_name =  $first_name . ' ' . $last_name;
-$email_subject = "New voucher order received";
-$email_body = "Hi $hotel_name,<br><br>
-A customer has purchased a voucher for your hotel: <strong>$title</strong>.<br><br>
-Voucher Details:<br>
-- <strong>Voucher Title</strong>: $title<br>
-- <strong>QR Code</strong>: $qr_code<br>
-- <strong>Total Amount</strong>: $total<br>
-- <strong>Customer Name</strong>: $f_name.''<br><br>
-- <strong>Customer Email</strong>: $email<br><br>
-- <strong>Validity</strong>: $valid_until<br><br>
 
-Please verify the voucher using the QR code provided when the customer redeems it. If you have any questions or need further details, feel free to contact our support team.<br><br>
-Best regards,<br>
-The QualityFriend Team";
 
-$email_body = mysqli_real_escape_string($conn, $email_body);
+
+
+
+// Dedicated translations for hotel notification email
+$email_translations = [
+    'en' => [
+        'subject' => "New Voucher Order Received for %s",
+        'greeting' => "Dear %s Team,",
+        'intro' => "A customer has purchased a voucher for your hotel. Below are the details:",
+        'buyer_details' => "Buyer Details",
+        'first_name' => "Name",
+        'email' => "Email",
+        'voucher_details' => "Voucher Details",
+        'voucher_title' => "Voucher Title",
+        'total_amount' => "Total Amount",
+        'valid_until' => "Valid Until",
+        'qr_code' => "QR Code",
+        'payment_details' => "Payment Confirmation",
+        'payer_name' => "Payer Name",
+        'payer_email' => "Payer Email",
+        'transaction_id' => "Transaction ID",
+        'amount' => "Amount Paid",
+        'closing' => "Please verify the voucher using the QR code when the customer redeems it. Contact our support team for any questions.",
+        'signature' => "Best regards,<br>The QualityFriend Team",
+        'powered_by' => "powered by Holidayfriend"
+    ],
+    'it' => [
+        'subject' => "Nuovo ordine di buono ricevuto per %s",
+        'greeting' => "Caro Team %s,",
+        'intro' => "Un cliente ha acquistato un buono per il vostro hotel. Di seguito i dettagli:",
+        'buyer_details' => "Dettagli dell'acquirente",
+        'first_name' => "Nome",
+        'email' => "Email",
+        'voucher_details' => "Dettagli del buono",
+        'voucher_title' => "Titolo del buono",
+        'total_amount' => "Importo totale",
+        'valid_until' => "Valido fino a",
+        'qr_code' => "Codice QR",
+        'payment_details' => "Conferma del pagamento",
+        'payer_name' => "Nome del pagatore",
+        'payer_email' => "Email del pagatore",
+        'transaction_id' => "ID transazione",
+        'amount' => "Importo pagato",
+        'closing' => "Si prega di verificare il buono utilizzando il codice QR quando il cliente lo riscatta. Contattate il nostro team di supporto per qualsiasi domanda.",
+        'signature' => "Cordiali saluti,<br>Il Team QualityFriend",
+        'powered_by' => "powered by Holidayfriend"
+    ],
+    'de' => [
+        'subject' => "Neue Gutscheinbestellung eingegangen für %s",
+        'greeting' => "Hallo %s-Team,",
+        'intro' => "Ein Kunde hat einen Gutschein für Ihr Hotel gekauft. Nachfolgend die Details:",
+        'buyer_details' => "Käuferdetails",
+        'first_name' => "Name",
+        'email' => "E-Mail",
+        'voucher_details' => "Gutscheindetails",
+        'voucher_title' => "Gutschein-Titel",
+        'total_amount' => "Gesamtbetrag",
+        'valid_until' => "Gültig bis",
+        'qr_code' => "QR-Code",
+        'payment_details' => "Zahlungsbestätigung",
+        'payer_name' => "Zahlername",
+        'payer_email' => "E-Mail des Zahlers",
+        'transaction_id' => "Transaktions-ID",
+        'amount' => "Bezahlter Betrag",
+        'closing' => "Bitte verifizieren Sie den Gutschein mit dem QR-Code, wenn der Kunde ihn einlöst. Kontaktieren Sie unser Support-Team bei Fragen.",
+        'signature' => "Freundliche Grüße,<br>Das QualityFriend-Team",
+        'powered_by' => "powered by Holidayfriend"
+    ]
+];
+
+// Select translations based on language
+$trans = $email_translations[$lang] ?? $email_translations['en'];
+
+// Holidayfriend logo URL
+$holidayfriend_logo = 'https://vouchers.qualityfriend.solutions/assets/images/background/holiday.png';
+
+// Format names and amounts
+$f_name = $first_name . ' ' . $last_name;
+$formatted_total = $total . ' ' . $currency;
+$formatted_amount = $amount . ' ' . $currency;
+
+// Email subject
+$email_subject = sprintf($trans['subject'], $hotel_name);
+
+// Email body (HTML)
+$email_body = "<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            padding: 20px;
+            text-align: center;
+        }
+        .header img {
+            max-width: 150px;
+            height: auto;
+        }
+        .content {
+            padding: 20px;
+            text-align: left;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
+            color: #555;
+        }
+        .content h3 {
+            font-size: 18px;
+            margin: 20px 0 10px;
+            color: #333;
+        }
+        .content strong {
+            color: #333;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #777;
+        }
+        .footer img {
+            max-width: 100px;
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='header'>
+            <img src='$hotel_image' alt='Hotel Logo'>
+        </div>
+        <div class='content'>
+            <p>" . sprintf($trans['greeting'], $hotel_name) . "</p>
+            <p>" . $trans['intro'] . "</p>
+            <h3>" . $trans['buyer_details'] . "</h3>
+            <p><strong>" . $trans['first_name'] . ":</strong> $f_name</p>
+            <p><strong>" . $trans['email'] . ":</strong> $email</p>
+            <h3>" . $trans['voucher_details'] . "</h3>
+            <p><strong>" . $trans['voucher_title'] . ":</strong> $title</p>
+            <p><strong>" . $trans['total_amount'] . ":</strong> $formatted_total</p>
+            <p><strong>" . $trans['valid_until'] . ":</strong> $valid_until</p>
+            <p><strong>" . $trans['qr_code'] . ":</strong> $qr_code</p>
+            <h3>" . $trans['payment_details'] . "</h3>
+            <p><strong>" . $trans['payer_name'] . ":</strong> $payerName</p>
+            <p><strong>" . $trans['payer_email'] . ":</strong> $payerEmail</p>
+            <p><strong>" . $trans['transaction_id'] . ":</strong> $transactionID</p>
+            <p><strong>" . $trans['amount'] . ":</strong> $formatted_amount</p>
+            <p>" . $trans['closing'] . "</p>
+            <p>" . $trans['signature'] . "</p>
+        </div>
+        <div class='footer'>
+            <p>" . $trans['powered_by'] . "</p>
+            <img src='https://vouchers.qualityfriend.solutions/assets/images/background/holiday.png' alt='Holidayfriend Logo'>
+        </div>
+    </div>
+</body>
+</html>";
+
+// Insert into tbl_other_email_jobs
 $create_at = date("Y-m-d H:i:s");
+$is_run = 0;
 $sql_email = "INSERT INTO `tbl_other_email_jobs` (`email`, `email_text`, `subject`, `create_at`, `lang`, `is_run`) 
-              VALUES ('$hotel_email', '$email_body', '$email_subject', '$create_at', '$lang', '0')";
-$conn->query($sql_email);
-
+              VALUES (?, ?, ?, ?, ?, ?)"    ;
+$stmt_email = $conn->prepare($sql_email);
+if ($stmt_email === false) {
+    die("Prepare failed: " . $conn->error);
+}
+$stmt_email->bind_param("sssssi", $hotel_email, $email_body, $email_subject, $create_at, $lang, $is_run);
+if ($stmt_email->execute()) {
+    // Email job inserted successfully
+} else {
+    echo "Error inserting email job: " . $stmt_email->error;
+}
+$stmt_email->close();
 ?>
 
 <?php

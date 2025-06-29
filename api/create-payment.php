@@ -27,9 +27,7 @@ if ($row = $result->fetch_assoc()) {
     $email = $row['email'];
     $amount = $row['total'];
     $user_id = $row['user_id'];
-
-
-
+    $orgnail_one = $row['voucher_id'];
 } else {
     echo "No record found.";
 }
@@ -37,7 +35,24 @@ $stmt->close();
 
 
 
-if (isset($_SESSION['my_user_id_is'])) {
+$query = "SELECT  `type` FROM `tbl_voucher` WHERE `id` = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $orgnail_one);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($row = $result->fetch_assoc()) {
+   
+    $type = $row['type'];
+    
+} else {
+    echo "No record found.";
+}
+$stmt->close();
+
+
+
+if ($type == 'INTERNAL') {
     $t_id = 0;
     $is_run = 0;
     $entry_time = date("Y-m-d H:i:s");
@@ -58,9 +73,8 @@ if (isset($_SESSION['my_user_id_is'])) {
     $is_run = 0;
     $create_at = date('Y-m-d H:i:s');
 
-    $stmt->bind_param("ssiiiss", $name, $email, $voucher_id, $is_run, $t_id, $entry_time,$lang);
+    $stmt->bind_param("ssiiiss", $name, $email, $voucher_id, $is_run, $t_id, $entry_time, $lang);
     if ($stmt->execute()) {
-
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -69,7 +83,6 @@ if (isset($_SESSION['my_user_id_is'])) {
     header("Location: ../hotel_purchased_voucher_detail.php?id=" . $voucher_id);
     exit();
 } else {
-
 }
 
 
@@ -113,7 +126,6 @@ if ($row = $result->fetch_assoc()) {
 $stmt->close();
 
 if ($clientID != '') {
-
 } else {
     exit;
 }
@@ -212,4 +224,3 @@ if (!$approvalUrl) {
 // Redirect user to PayPal approval URL
 header("Location: $approvalUrl");
 exit;
-?>

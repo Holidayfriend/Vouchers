@@ -180,8 +180,11 @@
         "applicable": "Applicable",
         "select_voucher": "Select Voucher",
         "added_successfully": "Added Successfully",
-        "updated_successfully": "Updated Successfully"
-        
+        "updated_successfully": "Updated Successfully",
+        "general_for_all": "General For All",
+        "category_based": "Category-based",
+        "vouchers_based": "Vouchers-based",
+        "hotel_address": "Hotel Address"
     },
     "it": {
         "app_name": "Buoni",
@@ -365,7 +368,11 @@
         "applicable": "Applicabile",
         "select_voucher": "Seleziona Buono",
         "added_successfully": "aggiunto con successo",
-        "updated_successfully": "aggiornato con successo"
+        "updated_successfully": "aggiornato con successo",
+        "general_for_all": "Generale per tutti",
+        "category_based": "Basato su categoria",
+        "vouchers_based": "Basato su buoni",
+        "hotel_address": "indirizzo dell'hotel"
     },
     "de": {
         "app_name": "Gutscheine",
@@ -550,6 +557,10 @@
         "applicable": "Anwendbar",
         "select_voucher": "Wählen Sie Gutschein aus",
         "added_successfully": "erfolgreich hinzugefügt",
-        "updated_successfully": "erfolgreich aktualisiert"
+        "updated_successfully": "erfolgreich aktualisiert",
+        "general_for_all": "Allgemein für alle",
+        "category_based": "Kategoriebezogen",
+        "vouchers_based": "Gutscheinbasiert",
+        "hotel_address": "Hoteladresse"
     }
 }

@@ -25,6 +25,7 @@ if ($result && $result->num_rows > 0) {
 
         $hotel_name = $row['hotel_name'];
         $hotel_website = $row['hotel_website'];
+        $hotel_address = $row['hotel_address'];
         $person_phone = $row['person_phone'];
         $is_paypal_live = $row['is_paypal_live'];
         $sandbox_client_id = $row['sandbox_client_id'];
@@ -39,7 +40,7 @@ if ($result && $result->num_rows > 0) {
         $font_family = $row['font_family'];
         $text_color = $row['text_color'];
         $button_text_color = $row['button_text_color'];
-          $button_hover = $row['button_hover'];
+        $button_hover = $row['button_hover'];
         $logo = $row['logo'];
 
         $analytics_google = $row['analytics_google'];
@@ -47,14 +48,9 @@ if ($result && $result->num_rows > 0) {
         if ($is_paypal_live == 1) {
             $check = 'checked';
         } else {
-
         }
-
-
-
     }
 } else {
-
 }
 
 // make ifram
@@ -79,7 +75,7 @@ $iframe_code_de = htmlspecialchars("<iframe src=\"$iframe_src_de\" width=\"100%\
 
 
 $page_text = getTranslation('dashboard', $lang)
-    ?>
+?>
 
 
 
@@ -176,6 +172,7 @@ $page_text = getTranslation('dashboard', $lang)
                             <h6><?php echo getTranslation('hotel_name', $lang) ?> : <?php echo $hotel_name ?></h6>
                             <h6><?php echo getTranslation('hotel_website', $lang) ?> : <?php echo $hotel_website ?></h6>
                             <h6><?php echo getTranslation('hotel_phone', $lang) ?> : <?php echo $person_phone ?></h6>
+                             <h6><?php echo getTranslation('hotel_address', $lang) ?> : <?php echo $hotel_address ?></h6>
                         </div>
                     </div>
                     <div class="row page-titles mb-3 add_background">
@@ -251,7 +248,7 @@ $page_text = getTranslation('dashboard', $lang)
                                 <div class="text-danger" id="error_text_color"></div>
                             </div>
                         </div>
-                         <div class="col-lg-6 col-xlg-6 col-md-6">
+                        <div class="col-lg-6 col-xlg-6 col-md-6">
                             <div class="input-container">
                                 <label class="my-lable"><?php echo getTranslation('button_hover', $lang) ?>:</label>
                                 <input type="color" class="form-control input_background" id="button_hover"
@@ -510,8 +507,7 @@ $page_text = getTranslation('dashboard', $lang)
     <script src="./assets/node_modules/sweetalert2/sweet-alert.init.js"></script>
 
     <script>
-
-        createButton.addEventListener('click', function () {
+        createButton.addEventListener('click', function() {
 
             // checkEmptyInput('live_client_secret', 'errorlive_client_secret', 'Please fill Admin Name');
             // checkEmptyInput('live_client_secret', 'errorlive_client_secret', 'Please fill Admin Surname Name');
@@ -553,7 +549,7 @@ $page_text = getTranslation('dashboard', $lang)
                     data: fd,
                     processData: false,
                     contentType: false,
-                    success: function (response) {
+                    success: function(response) {
 
                         console.log(response);
                         if (response == '1') {
@@ -567,9 +563,7 @@ $page_text = getTranslation('dashboard', $lang)
                                     window.location.href = "hotel_dashboard.php";
                                 }
                             })
-                        }
-
-                        else {
+                        } else {
                             Swal.fire({
                                 type: 'error',
                                 title: 'Oops...',
@@ -579,7 +573,7 @@ $page_text = getTranslation('dashboard', $lang)
                         }
 
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.log(error);
                     },
                 });
@@ -606,8 +600,6 @@ $page_text = getTranslation('dashboard', $lang)
                 errorElement.textContent = '';
             }
         }
-
-
     </script>
 
     <script>
@@ -621,6 +613,7 @@ $page_text = getTranslation('dashboard', $lang)
             document.body.removeChild(textArea);
 
         }
+
         function copyCode_it() {
             let codeElement = document.getElementById("iframe-code_it");
             let textArea = document.createElement("textarea");
@@ -631,6 +624,7 @@ $page_text = getTranslation('dashboard', $lang)
             document.body.removeChild(textArea);
 
         }
+
         function copyCode_de() {
             let codeElement = document.getElementById("iframe-code_de");
             let textArea = document.createElement("textarea");
@@ -644,7 +638,7 @@ $page_text = getTranslation('dashboard', $lang)
     </script>
 
     <script>
-        analyticsButton.addEventListener('click', function () {
+        analyticsButton.addEventListener('click', function() {
             checkEmptyInput('analytics_google', 'error_analytics_google', 'Please paste the Google Analytics tracking code');
 
             if (document.querySelectorAll('.input-invalid').length === 0) {
@@ -655,8 +649,10 @@ $page_text = getTranslation('dashboard', $lang)
                 $.ajax({
                     url: 'utill/edit_analytics_google.php',
                     type: 'POST',
-                    data: { analytics_google: analytics_google }, // Send as regular POST data
-                    success: function (response) {
+                    data: {
+                        analytics_google: analytics_google
+                    }, // Send as regular POST data
+                    success: function(response) {
                         Swal.fire({
                             title: 'Saved',
                             icon: 'success', // use `icon` instead of `type` (deprecated)
@@ -668,18 +664,17 @@ $page_text = getTranslation('dashboard', $lang)
                             }
                         });
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.log(error);
                     },
                 });
             }
         });
-
     </script>
 
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             let is_logo_changed = <?php echo !empty($logo) ? '0' : '1'; ?>;
             const logoInput = document.getElementById('logo');
             const uploadButton = document.getElementById('uploadButton');
@@ -696,14 +691,14 @@ $page_text = getTranslation('dashboard', $lang)
                 removeButton.classList.add('d-none');
             }
 
-            logoInput.addEventListener('change', function () {
+            logoInput.addEventListener('change', function() {
                 if (logoInput.files.length > 0) {
                     is_logo_changed = 1;
                     uploadButton.classList.add('d-none');
                     removeButton.classList.remove('d-none');
                     const file = logoInput.files[0];
                     const reader = new FileReader();
-                    reader.onload = function (e) {
+                    reader.onload = function(e) {
                         logoImage.src = e.target.result;
                     };
                     reader.readAsDataURL(file);
@@ -715,11 +710,11 @@ $page_text = getTranslation('dashboard', $lang)
                 checkFileInputEmpty('logo', 'error_logo', '<?php echo getTranslation('error_logo', $lang) ?: "Please choose a logo image."; ?>');
             });
 
-            uploadButton.addEventListener('click', function () {
+            uploadButton.addEventListener('click', function() {
                 logoInput.click();
             });
 
-            removeButton.addEventListener('click', function () {
+            removeButton.addEventListener('click', function() {
                 logoInput.value = '';
                 uploadButton.classList.remove('d-none');
                 removeButton.classList.add('d-none');
@@ -727,7 +722,7 @@ $page_text = getTranslation('dashboard', $lang)
                 is_logo_changed = 1;
             });
 
-            ciSettingsButton.addEventListener('click', function () {
+            ciSettingsButton.addEventListener('click', function() {
                 checkEmptyInput('header_color', 'error_header_color', '<?php echo getTranslation('error_header_color', $lang) ?: "Please select a header color."; ?>');
                 checkEmptyInput('link_color', 'error_link_color', '<?php echo getTranslation('error_link_color', $lang) ?: "Please select a link color."; ?>');
                 checkEmptyInput('button_color', 'error_button_color', '<?php echo getTranslation('error_button_color', $lang) ?: "Please select a button color."; ?>');
@@ -741,7 +736,7 @@ $page_text = getTranslation('dashboard', $lang)
                     const buttonColor = document.getElementById('button_color').value.trim();
                     const fontFamily = document.getElementById('font_family').value.trim();
                     const textColor = document.getElementById('text_color').value.trim();
-                     const buttonTextColor = document.getElementById('button_text_color').value.trim();
+                    const buttonTextColor = document.getElementById('button_text_color').value.trim();
                     const logoFile = logoInput.files[0];
 
                     const formData = new FormData();
@@ -763,10 +758,10 @@ $page_text = getTranslation('dashboard', $lang)
                         data: formData,
                         processData: false,
                         contentType: false,
-                        success: function (response) {
+                        success: function(response) {
                             window.location.reload();
                         },
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
                             console.log(error);
                             Swal.fire({
                                 icon: 'error',

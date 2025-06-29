@@ -1,95 +1,70 @@
 <?php
 include '../util_config.php';
 include '../util_session.php';
-include('../smtp/PHPMailerAutoload.php');
+include '../smtp/PHPMailerAutoload.php';
+
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $lang = 'en';
 $translations = [
     'en' => [
-        'subject' => "Your Voucher Purchase Confirmation - $hotel_name",
-        'payment_successful' => 'Payment Successful',
-        'transaction_details' => 'Transaction Detail',
-        'more_details' => 'More Detail',
-        'transaction_id' => 'Transaction ID',
-        'payer_name' => 'Payer Name',
-        'email' => 'Email',
-        'amount' => 'Amount',
-        'payer_id' => 'Payer ID',
-        'first_name' => 'First Name',
-        'last_name' => 'Last Name',
-        'per_voucher' => 'Per Voucher',
-        'quantity' => 'Quantity',
-        'total_amount' => 'Total Amount',
-        'phone' => 'Phone',
-        'address' => 'Address',
-        'download_voucher' => 'Download Voucher',
-        'contact_us' => 'For any inquiries, please contact us at',
-        'copyright' => 'All rights reserved.',
+        'subject' => "Your %s Voucher Is Ready",
+        'greeting' => "Dear",
+        'thank_you' => "Thank you for your purchase – your voucher is now available!",
+        'download_voucher' => 'Download your voucher here',
+        'contact_text' => "If you have any questions or special requests, feel free to contact us:",
+        'closing' => "Warm regards",
+        'team' => "Your %s Team",
+        'powered_by' => "powered by Holidayfriend"
     ],
     'it' => [
-        'subject' => "Conferma di acquisto del tuo voucher - $hotel_name",
-        'payment_successful' => 'Pagamento Riuscito',
-        'transaction_details' => 'Dettagli Transazione',
-        'more_details' => 'Maggiori Dettagli',
-        'transaction_id' => 'ID Transazione',
-        'payer_name' => 'Nome del Pagatore',
-        'email' => 'E-mail',
-        'amount' => 'Importo',
-        'payer_id' => 'ID Pagatore',
-        'first_name' => 'Nome',
-        'last_name' => 'Cognome',
-        'per_voucher' => 'Per Voucher',
-        'quantity' => 'Quantità',
-        'total_amount' => 'Importo Totale',
-        'phone' => 'Telefono',
-        'address' => 'Indirizzo',
-        'download_voucher' => 'Scarica il Voucher',
-        'contact_us' => 'Per qualsiasi richiesta, contattaci all’indirizzo',
-        'copyright' => 'Tutti i diritti riservati.',
+        'subject' => "Il Suo buono %s è pronto",
+        'greeting' => "Caro",
+        'thank_you' => "Grazie per il Suo acquisto – il Suo buono è ora disponibile!",
+        'download_voucher' => 'Scaricare il buono qui',
+        'contact_text' => "Per domande o richieste particolari siamo volentieri a Sua disposizione:",
+        'closing' => "Un cordiale saluto",
+        'team' => "Il Suo team del %s",
+        'powered_by' => "powered by Holidayfriend"
     ],
     'de' => [
-        'subject' => "Ihre Gutschein-Kaufbestätigung - $hotel_name",
-        'payment_successful' => 'Zahlung Erfolgreich',
-        'transaction_details' => 'Transaktionsdetails',
-        'more_details' => 'Weitere Details',
-        'transaction_id' => 'Transaktions-ID',
-        'payer_name' => 'Name des Zahlers',
-        'email' => 'E-Mail',
-        'amount' => 'Betrag',
-        'payer_id' => 'Zahler-ID',
-        'first_name' => 'Vorname',
-        'last_name' => 'Nachname',
-        'per_voucher' => 'Pro Gutschein',
-        'quantity' => 'Menge',
-        'total_amount' => 'Gesamtbetrag',
-        'phone' => 'Telefon',
-        'address' => 'Adresse',
-        'download_voucher' => 'Gutschein herunterladen',
-        'contact_us' => 'Bei Fragen kontaktieren Sie uns unter',
-        'copyright' => 'Alle Rechte vorbehalten.',
+        'subject' => "Ihr %s-Gutschein ist da",
+        'greeting' => "Hallo",
+        'thank_you' => "Vielen Dank für Ihren Kauf – Ihr Gutschein ist jetzt verfügbar!",
+        'download_voucher' => 'Gutschein hier herunterladen',
+        'contact_text' => "Bei Fragen oder besonderen Wünschen melden Sie sich gerne:",
+        'closing' => "Freundliche Grüße",
+        'team' => "Ihr %s-Team",
+        'powered_by' => "powered by Holidayfriend"
     ]
 ];
-
-
 
 $sql = "SELECT 
             a.id, a.v_id, a.is_run, a.t_id, a.lang,
             b.first_name, b.last_name, b.email, b.title, 
             b.amount, b.description, b.our_description, b.image, b.quantity, 
-            b.total, b.qr_code, b.p_time, b.user_id, b.phone, b.address
+            b.total, b.qr_code, b.p_time, b.user_id, b.phone, b.address, b.valid_until
         FROM tbl_email_jobs AS a 
         INNER JOIN tbl_users_vouchers AS b ON a.v_id = b.id 
         WHERE a.is_run = 0";
 
 $stmt = $conn->prepare($sql);
+if (!$stmt) {
+    die("SQL Prepare Error (email_jobs): " . $conn->error);
+}
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Base URL for images and voucher download
-if ($_SERVER['HTTP_HOST'] === 'localhost') {
-    $base = 'http://localhost/vouchers/';
-} else {
-    $base = 'https://vouchers.qualityfriend.solutions/';
+if (!$result) {
+    die("SQL Execution Error (email_jobs): " . $conn->error);
 }
+
+// Base URL for images and voucher download
+$base = $_SERVER['HTTP_HOST'] === 'localhost' ? 'http://localhost/vouchers/' : 'https://vouchers.qualityfriend.solutions/';
+$holidayfriend_logo = $base . 'images/holidayfriend_logo.png'; // Adjust path to Holidayfriend logo
 
 while ($row = $result->fetch_assoc()) {
     $id = $row['id'];
@@ -98,13 +73,13 @@ while ($row = $result->fetch_assoc()) {
     $v_id = $row['v_id'];
     $is_run = $row['is_run'];
     $t_id = $row['t_id'];
-    $first_name = $row['first_name'];
+    $first_name = $row['first_name'] ?: 'Guest';
     $last_name = $row['last_name'];
     $email = $row['email'];
     $title = $row['title'];
     $amount_v = $row['amount'];
     $description = $row['description'];
-    $our_description = $row['our_description'];
+    $our_description = $row['our_description'] ?: $description;
     $image = $base . $row['image'];
     $quantity = $row['quantity'];
     $total = $row['total'];
@@ -113,144 +88,184 @@ while ($row = $result->fetch_assoc()) {
     $user_id = $row['user_id'];
     $phone = $row['phone'];
     $address = $row['address'];
+    $valid_until = $row['valid_until'] ?: date('Y-m-d', strtotime($p_time . ' +1 year'));
 
     // Fetch hotel details
-    $query = "SELECT `hotel_name`, `hotel_website`, `logo`,`email` FROM `tbl_user` WHERE `user_id` = ?";
+    $query = "SELECT `hotel_name`, `hotel_website`, `logo`, `email`, `person_phone`, `discover_more`, `discover_more_it`, `discover_more_de`, `hotel_address` 
+              FROM `tbl_user` WHERE `user_id` = ?";
     $stmt_hotel = $conn->prepare($query);
+    if (!$stmt_hotel) {
+        die("SQL Prepare Error (user): " . $conn->error);
+    }
     $stmt_hotel->bind_param("i", $user_id);
     $stmt_hotel->execute();
     $result1 = $stmt_hotel->get_result();
 
-    $hotel_name = '';
-    $hotel_email = '';
-    $hotel_website = '';
-    $hotel_image = '';
+    $hotel_name = 'Default Hotel';
+    $hotel_email = 'info@default.com';
+    $hotel_phone = '+39 0471 345102'; // Fallback phone number
+    $hotel_website = 'https://default.com';
+    $hotel_address = $lang === 'it' ? 'Default Hotel – Costalovara 22 – I-39054 Renon' : 'Default Hotel – Wolfsgruben 22 – I-39054 Ritten';
+    $hotel_image = $base . 'default_logo.png';
+    $discover_more = $hotel_website;
+    $discover_more_it = $hotel_website;
+    $discover_more_de = $hotel_website;
 
-    if ($row1 = $result1->fetch_assoc()) {
-        $hotel_name = $row1['hotel_name'];
-        $hotel_email = $row1['email'];
-        $hotel_website = $row1['hotel_website'];
-        $hotel_image = $base . $row1['logo'];
+    if ($result1->num_rows > 0) {
+        $row1 = $result1->fetch_assoc();
+        $hotel_name = $row1['hotel_name'] ?: $hotel_name;
+        $hotel_email = $row1['email'] ?: $hotel_email;
+        $hotel_phone = $row1['person_phone'] ?: $hotel_phone;
+        $hotel_website = $row1['hotel_website'] ?: $hotel_website;
+        $raw_hotel_address = $row1['hotel_address'] ?: ($lang === 'it' ? 'Costalovara 22 – I-39054 Renon' : 'Wolfsgruben 22 – I-39054 Ritten');
+        $hotel_image = $row1['logo'] ? $base . $row1['logo'] : $hotel_image;
+        $discover_more = $row1['discover_more'] ?: $hotel_website;
+        $discover_more_it = $row1['discover_more_it'] ?: $hotel_website;
+        $discover_more_de = $row1['discover_more_de'] ?: $hotel_website;
+        // Format hotel address with hotel name
+        $hotel_address = $hotel_name . ' – ' . $raw_hotel_address;
+    } else {
+        echo "No hotel data found for user_id: $user_id in Voucher ID: $v_id<br>";
     }
     $stmt_hotel->close();
 
-    // Fetch transaction details if t_id > 0 (your exact block)
-    $transaction_id = '';
-    $payer_name = '';
-    $payer_email = '';
-    $payer_id = '';
-    $transaction_amount = '';
-    $purchase_date = '';
-    $currency = 'EUR';
-
-    if ($t_id > 0) {
-        $query = "SELECT `transaction_id`, `payer_name`, `payer_email`, `payer_id`, `amount`, `purchase_date`
-                  FROM `tbl_transaction` WHERE `id` = ?";
-        $stmt_trans = $conn->prepare($query);
-        $stmt_trans->bind_param("i", $t_id);
-        $stmt_trans->execute();
-        $result_trans = $stmt_trans->get_result();
-
-        if ($row_trans = $result_trans->fetch_assoc()) {
-            $transaction_id = $row_trans['transaction_id'];
-            $payer_name = $row_trans['payer_name'];
-            $payer_email = $row_trans['payer_email'];
-            $payer_id = $row_trans['payer_id'];
-            $transaction_amount = $row_trans['amount'];
-            $purchase_date = $row_trans['purchase_date'];
-            $currency = 'EUR';
-        }
-        $stmt_trans->close();
-    }
-
-    // Voucher download URL with qr_code parameter
+    // Select discover_more URL based on language
+    $discover_more_url = $lang === 'it' ? $discover_more_it : ($lang === 'de' ? $discover_more_de : $discover_more);
     $voucher_url = $base . "api/download_voucher.php?qr_code=" . urlencode($qr_code) . "&lang=" . urlencode($lang);
 
-    // Email subject
-    $emailsubject = $trans['subject'];
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email address ($email) for Voucher ID: $v_id, skipping email sending<br>";
+        continue;
+    }
 
-    // Email body (HTML)
+    // Email subject
+    $emailsubject = sprintf($trans['subject'], $hotel_name);
+
+    // Format team name for email
+    $team_name = sprintf($trans['team'], $hotel_name);
+
     // Email body (HTML)
     $emailBody = "
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset='UTF-8'>
     <style>
-        body { font-family: Arial, sans-serif; color: #333; background-color: #f8f9fa; }
-        .container { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
-        .header { background-color: #28a745; color: white; padding: 10px; text-align: center; border-radius: 5px 5px 0 0; }
-        .footer { text-align: center; margin-top: 20px; font-size: 12px; color: #777; }
-        table { width: 100%; border-collapse: collapse; margin-top: 12px; }
-        th, td { padding: 8px; border: 1px solid #ddd; }
-        th { background-color: #f5f5f5; }
-        img { max-width: 100%; height: auto; }
-        .text-center { text-align: center; }
-        .mt-3 { margin-top: 12px; }
-        .mt-4 { margin-top: 16px; }
-        .mt-5 { margin-top: 20px; }
-        .mb-5 { margin-bottom: 20px; }
-        .shadow-lg { box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-        .rounded { border-radius: 5px; }
-        a { color: #007bff; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .btn { display: inline-block; padding: 10px 20px; background-color: #C72B42; color: white; text-decoration: none; border-radius: 5px; }
-        .btn:hover { background-color: #C72B42; color: white; }
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            padding: 20px;
+            text-align: center;
+        }
+        .header img {
+            max-width: 150px;
+            height: auto;
+        }
+        .content {
+            padding: 20px;
+            text-align: left;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
+            color: #555;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #C72B42;
+            color: white !important;
+            text-decoration: none !important;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #a12336;
+            color: white !important;
+            text-decoration: none !important;
+        }
+        .download-btn:visited, .download-btn:active {
+            color: white !important;
+            text-decoration: none !important;
+        }
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #777;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer img {
+            max-width: 100px;
+            height: auto;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class='container mt-5 mb-5'>
+    <div class='container'>
         <div class='header'>
-            <h2>{$trans['payment_successful']}</h2>
+            <img src='$hotel_image' alt='Hotel Logo'>
         </div>
-        <div class='text-center mt-3 '>
-            <img src='$hotel_image' alt='Hotel Image' style='max-width: 200px; border-radius: 5px;'>
-        </div>
-        <h4 class='mt-3 text-center'>$hotel_name</h4>
-        <p class='text-center'><a href='$hotel_website' target='_blank'>$hotel_website</a></p>";
-
-    // Add transaction details if $t_id > 0
-    if ($t_id > 0) {
-        $emailBody .= "
-        <h5>{$trans['transaction_details']}</h5>
-        <table class='mt-3'>
-            <tr><th>{$trans['transaction_id']}</th><td>$transaction_id</td></tr>
-            <tr><th>{$trans['payer_name']}</th><td>$payer_name</td></tr>
-            <tr><th>{$trans['email']}</th><td>$payer_email</td></tr>
-            <tr><th>{$trans['amount']}</th><td>$transaction_amount $currency</td></tr>
-            <tr><th>{$trans['payer_id']}</th><td>$payer_id</td></tr>
-        </table>";
-    }
-
-    $emailBody .= "
-        <h5>{$trans['more_details']}</h5>
-        <table class='mt-3'>
-            <tr><th>{$trans['first_name']}</th><td>$first_name</td></tr>
-            <tr><th>{$trans['last_name']}</th><td>$last_name</td></tr>
-            <tr><th>{$trans['email']}</th><td>$email</td></tr>
-            <tr><th>{$trans['per_voucher']}</th><td>$amount_v $currency</td></tr>
-            <tr><th>{$trans['quantity']}</th><td>$quantity</td></tr>
-            <tr><th>{$trans['total_amount']}</th><td>$total $currency</td></tr>
-            <tr><th>{$trans['phone']}</th><td>$phone</td></tr>
-            <tr><th>{$trans['address']}</th><td>$address</td></tr>
-        </table>
-        <div class='text-center mt-4'>
-            <a href='$voucher_url' class='btn'>{$trans['download_voucher']}</a>
+        <div class='content'>
+            <p>{$trans['greeting']} $first_name,</p>
+            <p>{$trans['thank_you']}</p>
+            <p><a href='$voucher_url' class='download-btn'>📥 {$trans['download_voucher']}</a></p>
+            <p class='contact-info'>
+                {$trans['contact_text']}<br>
+                📞 <a href='tel:$hotel_phone'>$hotel_phone</a> – ✉️ <a href='mailto:$hotel_email'>$hotel_email</a>
+            </p>
+            <p>{$trans['closing']}</p>
+            <p>$team_name</p>
+            <p><a href='$hotel_website' target='_blank'>$hotel_website</a></p>
+            <p>$hotel_address</p>
         </div>
         <div class='footer'>
-            <p>{$trans['contact_us']} <a href='mailto:info@weihrerhof.com'>info@weihrerhof.com</a>.</p>
-            <p>© " . date('Y') . " $hotel_name. {$trans['copyright']}</p>
+            <p>{$trans['powered_by']}</p>
+            <img src='https://vouchers.qualityfriend.solutions/assets/images/background/holiday.png' alt='Holidayfriend Logo'>
         </div>
     </div>
 </body>
 </html>";
 
-
     // Send email
-    if (sendEmail($email, $emailsubject, $emailBody, $hotel_name, $hotel_emai)) {
+    if (sendEmail($email, $emailsubject, $emailBody, $hotel_name, $hotel_email)) {
         markEmailAsSent($conn, $id);
         echo "Email sent to $email for Voucher ID: $v_id<br>";
     } else {
-        echo "Failed to send email to $email for Voucher ID: $v_id<br>";
+        echo "Failed to send email to $email for Voucher ID: $v_id: " . error_get_last()['message'] . "<br>";
     }
 }
 
@@ -261,36 +276,44 @@ $conn->close();
 function sendEmail($to, $subject, $body, $fromName, $replyTo)
 {
     $mail = new PHPMailer();
-    $mail->IsSMTP();
-    $mail->SMTPAuth = true;
-    $mail->SMTPSecure = 'tls';
-    $mail->Host = "smtp.hostinger.com";
-    $mail->Port = 587;
-    $mail->IsHTML(true);
-    $mail->CharSet = 'UTF-8';
-    $mail->Username = "noreply@qualityfriend.solutions";
-    $mail->Password = 'Pakistan@143';
-    $mail->SetFrom("noreply@qualityfriend.solutions", $fromName);
-    $mail->AddReplyTo($replyTo, $fromName);
-    $mail->Subject = $subject;
-    $mail->Body = $body;
-    $mail->AddAddress($to);
-    $mail->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => false
-        )
-    );
-
-    return $mail->Send();
+    try {
+        $mail->IsSMTP();
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = 'tls';
+        $mail->Host = "smtp.hostinger.com";
+        $mail->Port = 587;
+        $mail->IsHTML(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Username = "noreply@qualityfriend.solutions";
+        $mail->Password = 'Pakistan@143';
+        $mail->SetFrom("noreply@qualityfriend.solutions", $fromName);
+        $mail->AddReplyTo($replyTo, $fromName);
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+        $mail->AddAddress($to);
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ];
+        return $mail->Send();
+    } catch (Exception $e) {
+        echo "Email sending failed for $to: " . $mail->ErrorInfo . "<br>";
+        return false;
+    }
 }
 
 function markEmailAsSent($conn, $emailJobId)
 {
     $sql = "UPDATE tbl_email_jobs SET done_at = NOW(), is_run = 1 WHERE id = ?";
     $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("SQL Prepare Error (markEmailAsSent): " . $conn->error);
+    }
     $stmt->bind_param("i", $emailJobId);
     $stmt->execute();
     $stmt->close();
 }
+?>
