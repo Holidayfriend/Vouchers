@@ -28,7 +28,7 @@ if (isset($_GET['id'])) {
 
 $sql = "SELECT 
             a.first_name, a.last_name, a.email, a.phone, a.country, a.address, a.redaem_time, a.voucher_id, a.valid_until, a.discount,
-            a.qr_code, a.quantity, a.total, a.user_id, a.title, a.description, a.our_description, 
+            a.qr_code, a.quantity, a.total, a.user_id, a.title, a.description, a.our_description, a.tax_number,
             a.amount, a.image AS v_image, 
             b.name, b.hotel_name, b.hotel_website, b.language, b.image AS hotel_image,
             c.code as p_code
@@ -60,6 +60,9 @@ if ($row = $result->fetch_assoc()) {
     $image = $base . $row['v_image'];
     $redaem_time = $row['redaem_time'];
     $voucher_id = $row['voucher_id'];
+    $tax_number = $row['tax_number'];
+
+
 
 
 
@@ -376,6 +379,13 @@ $page_text = getTranslation('voucher_detail', $lang);
                                 <th><?= getTranslation('address', $lang) ?></th>
                                 <td><?= $address ?></td>
                             </tr>
+                            <tr>
+                                <th><?= getTranslation('tax_number', $lang) ?></th>
+                                <td><?= $tax_number ?></td>
+                            </tr>
+
+                          
+                            
                         </table>
 
                         <div id="voucherDiv" class="card shadow-lg border-0  rounded">

@@ -184,7 +184,8 @@
         "general_for_all": "General For All",
         "category_based": "Category-based",
         "vouchers_based": "Vouchers-based",
-        "hotel_address": "Hotel Address"
+        "hotel_address": "Hotel Address",
+        "tax_number": "Tax Number"
     },
     "it": {
         "app_name": "Buoni",
@@ -372,7 +373,8 @@
         "general_for_all": "Generale per tutti",
         "category_based": "Basato su categoria",
         "vouchers_based": "Basato su buoni",
-        "hotel_address": "indirizzo dell'hotel"
+        "hotel_address": "indirizzo dell'hotel",
+        "tax_number": "Codice Fiscale"
     },
     "de": {
         "app_name": "Gutscheine",
@@ -561,6 +563,7 @@
         "general_for_all": "Allgemein für alle",
         "category_based": "Kategoriebezogen",
         "vouchers_based": "Gutscheinbasiert",
-        "hotel_address": "Hoteladresse"
+        "hotel_address": "Hoteladresse",
+        "tax_number": "Steuernummer"
     }
 }
