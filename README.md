@@ -1,51 +1,84 @@
-# Qualityfriend - The simple quality tool – built by a hotelier for hoteliers.
+# 🎟️ Vouchers Software Documentation
 
-💡 Your digital assistant for small and family-run hotels – now open source!
-
-**Qualityfriend** is a modular tool designed to simplify daily hotel operations:  
-checklists, handovers, recruiting, housekeeping, and more.  
-Built by a hotel – for hotels.
-
+## 📖 Overview
+**Vouchers** is a user-friendly software solution for hotels to create, manage, and integrate customizable vouchers for guests.  
+The platform empowers super admins to oversee hotels, while hotel administrators can generate branded vouchers, manage transactions, apply discounts, and embed vouchers seamlessly on their websites. Guests benefit from an intuitive experience, receiving QR codes for voucher redemption.
 
 ---
 
-## ✨ What is Qualityfriend?
+## 📦 Features and Modules
 
-Qualityfriend helps hotels reduce paperwork, improve teamwork, and bring structure to recurring processes – without expensive software or complicated setup.
-
-Whether you’re managing a 10-room family hotel or coordinating a housekeeping team, qualityfriend gives you clarity, flexibility, and control.
+### 1. 👨‍💼 Super Admin Management
+- **Add Hotels**: Super admins can register new hotels by providing details like:
+  - Hotel name
+  - Location
+  - Contact information
+- **Manage Hotels**: Edit, update, or deactivate hotel accounts for centralized control.
 
 ---
 
-## 🧩 Features & Modules
+### 2. 🎨 Voucher Creation and Customization
+- **Add Voucher**: Create vouchers with:
+  - Title, description, price, and validity period.
+- **Customization Options**:
+  - Color: Match the voucher's appearance to hotel branding.
+  - Font Family: Align fonts with hotel typography.
+- **Categories**: Organize vouchers into categories for easy filtering (e.g., Room Stay, Spa, Dining).
 
-| Module         | Starter (Free) | Pro (€29) | Enterprise (€39) |
-|----------------|----------------|-----------|------------------|
-| Checklists     | ✅              | ✅         | ✅               |
-| Handovers      | ✅              | ✅         | ✅               |
-| Manuals        | ✅              | ✅         | ✅               |
-| Notes          | ✅              | ✅         | ✅               |
-| Repairs        | ✅              | ✅         | ✅               |
-| Chat           | ✅              | ✅         | ✅               |
-| Recruiting     | ❌              | ✅         | ✅               |
-| Duty Planning  | ❌              | ✅         | ✅               |
-| Housekeeping   | ❌              | ❌         | ✅ + API         |
+---
+
+### 3. 💸 Promo Codes and Discounts
+- **Promo Codes**: Create discounts for guests during checkout.
+  - Example: `SUMMER25` for a 25% discount.
+- **Discount Application**: Automatically calculate and apply valid discounts.
+
+---
+
+### 4. 💳 Payment and Transaction Details
+- **Payment Integration**:
+  - PayPal for secure purchases.
+- **Voucher Types**:
+  - **Internal Voucher**: Includes PayPal integration.
+  - **Simple Voucher**: No payment integration; used internally or for promotions.
+- **Transaction Details**:
+  - Each purchase generates a record with:
+    - Transaction ID, amount, date, promo code used, and discount applied.
+  - Accessible via the admin dashboard.
+
+---
+
+### 5. 📱 QR Code Generation
+- Unique QR codes are generated for every purchased voucher.
+- Delivered via email for redemption at the hotel.
+
+---
+
+### 6. 📊 Analytics and Reporting
+- **Google Analytics Tracking**: Monitor voucher performance and user interactions.
+- **Revenue and Transaction Reports**: View detailed insights on:
+  - Voucher sales, transaction details, revenue, and promo code usage.
+- **Filtering**:
+  - Filter by categories, date, or other criteria.
+
+---
+
+### 7. 🌐 Website Integration
+- **Iframe Embed**: Generate iframe codes for hotel administrators to display vouchers on their websites.
+- Ensures a seamless guest experience for browsing and purchasing.
+
+---
+
+### 8. 📧 Email Notifications
+- Automated emails are sent to purchasers with:
+  - Voucher details (title, price, discount applied).
+  - Unique QR code for redemption.
+  - Instructions for using the voucher at the hotel.
 
 ---
 
 ## 🚀 How to Get Started
 
-### 🟢 Try the Cloud Version
-- 👉 [Sign up for free](https://qualityfriend.solutions)
-- Includes hosting, updates & support
-- No technical setup required
-
-### ⚙️ Self-Hosting Option
-You prefer full control? You can host HolidayFriend yourself.
-
 - 🛠️ [Developer Setup Guide](docs/dev-setup.md)
-- 🌐 [System Architecture](docs/architecture.md)
-- 💡 [List of Modules](docs/modules.md)
 
 ---
 
@@ -74,19 +107,9 @@ That means: You can use, modify and share it freely – as long as your modified
 
 ---
 
-## 🙌 Why Open Source?
-
-Qualityfriend by holidayfriend.solutions was originally developed by a hotelier – for his own family-run hotel in South Tyrol, Italy.  
-The goal: to simplify operations, reduce paperwork, and bring clarity to the daily chaos of hotel life.
-
-But why keep it to ourselves?
-
-> **We believe that small and medium-sized hotels deserve great digital tools – without high costs or complexity.**
-
-That’s why Qualityfriend is now open source.  
-Most of its features are free to use – because software should support hospitality, not drain its resources.
-
-If it helps us, maybe it can help you too.
+## 🔗 Additional Notes
+- Ensure Google Analytics and PayPal are configured correctly for full functionality.
+- Regularly review transaction and revenue reports to optimize voucher offerings.
 
 ---
 
