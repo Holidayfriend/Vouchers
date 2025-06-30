@@ -34,9 +34,7 @@ if (empty($qr_code)) {
     die("Invalid QR code.");
 }
 
-$sql = "SELECT 
-            title, amount, description, our_description, image, quantity, 
-            total, qr_code, user_id,voucher_id,valid_until
+$sql = "SELECT title, amount, description, our_description, image, quantity, total, qr_code, user_id, voucher_id, valid_until
         FROM tbl_users_vouchers 
         WHERE qr_code = ?";
 $stmt = $conn->prepare($sql);
@@ -62,7 +60,7 @@ if ($row = $result->fetch_assoc()) {
 $stmt->close();
 
 // Fetch hotel details
-$query = "SELECT `hotel_name`, `hotel_website`, `image` FROM `tbl_user` WHERE `user_id` = ?";
+$query = "SELECT hotel_name, hotel_website, image FROM tbl_user WHERE user_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -79,10 +77,10 @@ if ($row = $result->fetch_assoc()) {
 }
 $stmt->close();
 
-$query = "SELECT a.active_to,a.create_at,b.is_fixed 
-    FROM tbl_voucher AS a 
-    INNER JOIN tbl_category AS b ON a.cat_id = b.id 
-    WHERE a.id = ?";
+$query = "SELECT a.active_to, a.create_at, b.is_fixed 
+          FROM tbl_voucher AS a 
+          INNER JOIN tbl_category AS b ON a.cat_id = b.id 
+          WHERE a.id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $voucher_id);
 $stmt->execute();
@@ -96,30 +94,17 @@ if ($row = $result->fetch_assoc()) {
 $stmt->close();
 $conn->close();
 
-$valid = '';
-
-if ($active_to == '' || is_null($active_to)) {
-    $valid = date('d/m/Y', strtotime($active_to));
-
-} else {
-    $valid = date('d/m/Y', strtotime($create_at . ' +1 year'));
-}
+$valid = $active_to ? date('d/m/Y', strtotime($active_to)) : date('d/m/Y', strtotime($create_at . ' +1 year'));
 
 // Base URL for images
-if ($_SERVER['HTTP_HOST'] === 'localhost') {
-    $base = 'http://localhost/vouchers/';
-} else {
-    $base = 'https://vouchers.qualityfriend.solutions/';
-}
-
+$base = $_SERVER['HTTP_HOST'] === 'localhost' ? 'http://localhost/vouchers/' : 'https://vouchers.qualityfriend.solutions/';
 $image = $base . $image;
 $hotel_image = $base . $hotel_image;
-$currency = 'EUR'; // Hardcoded as per your transaction block
+$currency = 'EUR';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -133,6 +118,8 @@ $currency = 'EUR'; // Hardcoded as per your transaction block
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 210mm;
+            height: 297mm;
         }
 
         #voucherDiv {
@@ -141,19 +128,17 @@ $currency = 'EUR'; // Hardcoded as per your transaction block
             margin: 0;
             padding: 10mm;
             box-sizing: border-box;
-            border: none;
-            box-shadow: none;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
         }
 
         .bg-gray-color {
-            /*background-color: rgb(244, 240, 240);*/
             flex-grow: 1;
             padding: 0;
-            /* Remove padding to avoid extra margins */
+            display: flex;
+            flex-direction: column;
         }
 
         .t-gray-color {
@@ -165,38 +150,45 @@ $currency = 'EUR'; // Hardcoded as per your transaction block
         }
 
         .padding-left-right {
-            margin-top: 40px;
-
+            margin-top: 10px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .padding-left-right1 {
-            margin-top: 20px;
-
+            margin-top: 5px;
         }
 
         .voucher-image-container {
             width: 210mm;
             margin-left: -10mm;
-            /* Offset parent padding */
             margin-right: -10mm;
-            /* Offset parent padding */
             padding: 0;
             box-sizing: border-box;
+            max-height: 80mm; /* Reduced to leave more space for text */
+            overflow: hidden;
         }
 
         .voucher-image {
-            width: 210mm;
-            max-width: 210mm;
-            margin: 0;
-            /* Remove all margins */
+            width: 100%;
             height: auto;
-            display: block;
+            max-height: 80mm;
             object-fit: cover;
-            /* Ensure image fills width */
+            display: block;
         }
 
-        .sized {
-            font-size: 300px;
+        .description-text {
+            font-size: 19px;
+            flex-grow: 1;
+        }
+
+        .description-text p {
+            margin: 5px 0;
+        }
+
+        .footer-section {
+            margin-top: 5px;
         }
 
         @media print {
@@ -218,23 +210,21 @@ $currency = 'EUR'; // Hardcoded as per your transaction block
                 margin: 0;
                 padding: 10mm;
                 box-shadow: none;
+                break-inside: avoid;
             }
 
             .voucher-image-container {
                 width: 210mm;
                 margin-left: -10mm;
                 margin-right: -10mm;
-                padding: 0;
+                max-height: 80mm;
             }
 
             .voucher-image {
-                width: 210mm;
-                max-width: 210mm;
-                margin: 0;
-                height: auto;
+                width: 100%;
+                max-height: 80mm;
                 object-fit: cover;
             }
-
         }
     </style>
     <script>
@@ -244,46 +234,55 @@ $currency = 'EUR'; // Hardcoded as per your transaction block
                 width: 70,
                 height: 70
             });
+
+            // Dynamically adjust font size to fit content
+            const adjustFontSize = () => {
+                const voucherDiv = document.getElementById("voucherDiv");
+                const descriptionTexts = document.querySelectorAll(".description-text");
+                let fontSize = 19; // Starting font size
+                descriptionTexts.forEach(el => {
+                    el.style.fontSize = fontSize + "px";
+                    while (voucherDiv.scrollHeight > voucherDiv.offsetHeight && fontSize > 12) {
+                        fontSize -= 0.5;
+                        el.style.fontSize = fontSize + "px";
+                    }
+                });
+            };
+
+            adjustFontSize();
             setTimeout(function () { window.print(); }, 700);
         };
     </script>
 </head>
-
 <body>
     <div id="voucherDiv">
         <div class="text-center pt-3 pb-2">
-            <img src="<?php echo $hotel_image; ?>" class="img-fluid" style="max-width: 200px;">
+            <img src="<?php echo $hotel_image; ?>" class="img-fluid" style="max-width: 200px; max-height: 30mm;">
         </div>
-        <div class="bg-gray-color mt-3">
+        <div class="bg-gray-color">
             <div class="text-center voucher-image-container">
-                <img src="<?php echo $image; ?>" class="voucher-image ">
+                <img src="<?php echo $image; ?>" class="voucher-image">
             </div>
-            <div class="padding-left-right ">
-                <h1 class="text-center t-gray-color "><?php echo $title; ?></h1>
+            <div class="padding-left-right">
+                <h1 class="text-center t-gray-color"><?php echo htmlspecialchars($title); ?></h1>
                 <?php if ($is_fixed == 0) { ?>
                     <h3 class="text-center t-black-color"><?php echo '€' . $total; ?></h3>
                 <?php } ?>
-                <p style="font-size: 19px;" class="text-muted text-left padding-left-right1">
-                    <?php echo $our_description; ?></p>
-                <p style="font-size: 19px;" class="text-muted text-left"><?php echo $description; ?></p>
-
+                <div class="text-left padding-left-right1 description-text"><?php echo $our_description; ?></div>
+                <div class="text-left description-text"><?php echo $description; ?></div>
             </div>
         </div>
-        <div class="text-center mt-2 mb-2">
+        <div class="text-center footer-section">
             <div style="text-align: right; width: 100%;">
                 <div id="qrcode" style="display: inline-block;"></div>
-                <br>
                 <p style="font-size: 11px;">
-                    <b><?php echo $qr_code; ?></b>
-                    <br>
-                    <?php echo $valid_until_text; ?>: <b><?php echo $valid_until ; ?></b>
+                    <b><?php echo htmlspecialchars($qr_code); ?></b><br>
+                    <?php echo $valid_until_text; ?>: <b><?php echo $valid; ?></b>
                 </p>
-            
             </div>
-            <p style="font-size: 14px; padding: 0; margin: 0;"> <?php echo $address_text; ?></p>
-            <p style="font-size: 14px; padding: 0; margin: 0;"> <?php echo $reservation_text; ?></p>
+            <p style="font-size: 14px; padding: 0; margin: 0;"><?php echo $address_text; ?></p>
+            <p style="font-size: 14px; padding: 0; margin: 0;"><?php echo $reservation_text; ?></p>
         </div>
     </div>
 </body>
-
 </html>
