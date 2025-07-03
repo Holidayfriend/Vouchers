@@ -13,7 +13,7 @@ $lang = isset($_GET['lang']) ? $_GET['lang'] : 'en';
 $amount = 0;
 $user_id = 0;
 
-$query = "SELECT  `total`,`user_id`,`first_name`,`email` FROM `tbl_users_vouchers` WHERE `id` = ?";
+$query = "SELECT  `total`,`user_id`,`first_name`,`email`,`voucher_id` FROM `tbl_users_vouchers` WHERE `id` = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $voucher_id);
 $stmt->execute();
@@ -84,7 +84,6 @@ if ($type == 'INTERNAL') {
     exit();
 } else {
 }
-
 
 
 
