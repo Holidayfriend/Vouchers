@@ -24,20 +24,53 @@ $currentYear = date('Y'); // 2025
 $selectedYear = isset($_GET['year']) ? $_GET['year'] : $currentYear;
 $selectedMonth = isset($_GET['month']) ? $_GET['month'] : 'all';
 $years = [$currentYear, $currentYear + 1];
-$months = [
-    '01' => 'January',
-    '02' => 'February',
-    '03' => 'March',
-    '04' => 'April',
-    '05' => 'May',
-    '06' => 'June',
-    '07' => 'July',
-    '08' => 'August',
-    '09' => 'September',
-    '10' => 'October',
-    '11' => 'November',
-    '12' => 'December'
-];
+$my_title  = '';
+if ($lang == 'de') {
+    $months = [
+        '01' => 'Januar',
+        '02' => 'Februar',
+        '03' => 'März',
+        '04' => 'April',
+        '05' => 'Mai',
+        '06' => 'Juni',
+        '07' => 'Juli',
+        '08' => 'August',
+        '09' => 'September',
+        '10' => 'Oktober',
+        '11' => 'November',
+        '12' => 'Dezember'
+    ];
+} else if ($lang == 'it') {
+    $months = [
+        '01' => 'Gennaio',
+        '02' => 'Febbraio',
+        '03' => 'Marzo',
+        '04' => 'Aprile',
+        '05' => 'Maggio',
+        '06' => 'Giugno',
+        '07' => 'Luglio',
+        '08' => 'Agosto',
+        '09' => 'Settembre',
+        '10' => 'Ottobre',
+        '11' => 'Novembre',
+        '12' => 'Dicembre'
+    ];
+} else {
+    $months = [
+        '01' => 'January',
+        '02' => 'February',
+        '03' => 'March',
+        '04' => 'April',
+        '05' => 'May',
+        '06' => 'June',
+        '07' => 'July',
+        '08' => 'August',
+        '09' => 'September',
+        '10' => 'October',
+        '11' => 'November',
+        '12' => 'December'
+    ];
+}
 
 // Determine days and months passed
 $today = new DateTime(); // Current date (2025-05-31 07:04 AM PKT)
@@ -61,7 +94,7 @@ $debugLog = "debug_log.txt";
 file_put_contents($debugLog, "Debug Log - " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
 
 // Sold and Redeemed Vouchers
-$voucherSql = "SELECT uv.id, v.title, uv.p_time, uv.redaem_time, uv.total
+$voucherSql = "SELECT uv.id, v.title,v.title_it,v.title_de, uv.p_time, uv.redaem_time, uv.total
                FROM `tbl_users_vouchers` uv
                JOIN `tbl_voucher` v ON uv.voucher_id = v.id
                WHERE uv.user_id = $my_user_id_is AND uv.is_delete = 0
@@ -169,7 +202,7 @@ while ($row = $promoTopResult->fetch_assoc()) {
 }
 
 // Top-Selling Vouchers
-$topVoucherSql = "SELECT v.title, v.cat_id, COUNT(uv.id) as sales_count,
+$topVoucherSql = "SELECT v.title,v.title_it,v.title_de, v.cat_id, COUNT(uv.id) as sales_count,
                          SUM(uv.total) as total_revenue, SUM(CASE WHEN uv.redaem_time != '' THEN 1 ELSE 0 END) as total_redeemed
                   FROM `tbl_users_vouchers` uv
                   JOIN `tbl_voucher` v ON uv.voucher_id = v.id
@@ -196,7 +229,37 @@ file_put_contents($debugLog, "Total Voucher Sales: $totalVoucherSales, Total Vou
 $topVoucherChartLabels = [];
 $topVoucherSalesData = [];
 foreach ($topVoucherDetails as $row) {
-    $topVoucherChartLabels[] = $row['title'];
+
+
+    $title = '';
+    if ($lang == 'en') {
+
+        if ($row['title'] != "") {
+            $title = $row['title'];
+        } else if ($row['title_it'] != "") {
+            $title = $row['title_it'];
+        } else if ($row['title_de'] != "") {
+            $title = $row['title_de'];
+        }
+    } else if ($lang == 'it') {
+        if ($row['title_it'] != "") {
+            $title = $row['title_it'];
+        } else if ($row['title'] != "") {
+            $title = $row['title'];
+        } else if ($row['title_de'] != "") {
+            $title = $row['title_de'];
+        }
+    } else {
+        if ($row['title_de'] != "") {
+            $title = $row['title_de'];
+        } else if ($row['title'] != "") {
+            $title = $row['title'];
+        } else if ($row['title_it'] != "") {
+            $title = $row['title_it'];
+        }
+    }
+
+    $topVoucherChartLabels[] =  $title;
     $topVoucherSalesData[] = $row['sales_count'];
 }
 ?>
@@ -268,7 +331,7 @@ foreach ($topVoucherDetails as $row) {
                         </div>
                     </form>
 
-             
+
 
                     <!-- Sold and Redeemed Vouchers -->
                     <div class="row page-titles mb-3 add_background">
@@ -300,7 +363,35 @@ foreach ($topVoucherDetails as $row) {
                                 <tbody>
                                     <?php foreach ($voucherDetails as $voucher): ?>
                                         <tr>
-                                            <td><?= htmlspecialchars($voucher['title']) ?></td>
+                                            <?php
+                                            $title = '';
+                                            if ($lang == 'en') {
+                                                if ($voucher['title'] != "") {
+                                                    $title = $voucher['title'];
+                                                } else if ($voucher['title_it'] != "") {
+                                                    $title = $voucher['title_it'];
+                                                } else if ($voucher['title_de'] != "") {
+                                                    $title = $voucher['title_de'];
+                                                }
+                                            } else if ($lang == 'it') {
+                                                if ($voucher['title_it'] != "") {
+                                                    $title = $voucher['title_it'];
+                                                } else if ($voucher['title'] != "") {
+                                                    $title = $voucher['title'];
+                                                } else if ($voucher['title_de'] != "") {
+                                                    $title = $voucher['title_de'];
+                                                }
+                                            } else {
+                                                if ($voucher['title_de'] != "") {
+                                                    $title = $voucher['title_de'];
+                                                } else if ($voucher['title'] != "") {
+                                                    $title = $voucher['title'];
+                                                } else if ($voucher['title_it'] != "") {
+                                                    $title = $voucher['title_it'];
+                                                }
+                                            }
+                                            ?>
+                                            <td><?= htmlspecialchars($title) ?></td>
                                             <td><?= $voucher['p_time'] ?></td>
                                             <td><?= $voucher['redaem_time'] != '' ? 1 : 0 ?></td>
                                             <td><?= $voucher['redaem_time'] ?: '-' ?></td>
@@ -327,7 +418,7 @@ foreach ($topVoucherDetails as $row) {
                         </div>
                         <div class="col-lg-6 col-xlg-6 col-md-6">
                             <h6><strong><?= getTranslation('total_discount', $lang) ?></strong></h6>
-                            <p>$<?= number_format($totalPromoDiscount, 2) ?></p>
+                            <p>€<?= number_format($totalPromoDiscount, 2) ?></p>
                         </div>
                         <!-- Table -->
                         <div class="col-lg-12 col-xlg-12 col-md-12 table-responsive">
@@ -347,9 +438,9 @@ foreach ($topVoucherDetails as $row) {
                                         <tr>
                                             <td><?= htmlspecialchars($promo['code']) ?></td>
                                             <td><?= ucfirst($promo['discount_type']) ?></td>
-                                            <td><?= $promo['discount_type'] == 'percentage' ? $promo['discount_value'] . '%' : '$' . $promo['discount_value'] ?></td>
+                                            <td><?= $promo['discount_type'] == 'percentage' ? $promo['discount_value'] . '%' : '€' . $promo['discount_value'] ?></td>
                                             <td><?= $promo['uses'] ?></td>
-                                            <td>$<?= number_format($promo['total_discount'] ?? 0, 2) ?></td>
+                                            <td>€<?= number_format($promo['total_discount'] ?? 0, 2) ?></td>
                                             <td><?= $promo['last_used'] ?? '-' ?></td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -374,7 +465,7 @@ foreach ($topVoucherDetails as $row) {
                         </div>
                         <div class="col-lg-6 col-xlg-6 col-md-6">
                             <h6><strong><?= getTranslation('total_revenue', $lang) ?></strong></h6>
-                            <p>$<?= number_format($totalVoucherRevenue, 2) ?></p>
+                            <p>€<?= number_format($totalVoucherRevenue, 2) ?></p>
                         </div>
                         <!-- Table -->
                         <div class="col-lg-12 col-xlg-12 col-md-12 table-responsive">
@@ -390,9 +481,37 @@ foreach ($topVoucherDetails as $row) {
                                 <tbody>
                                     <?php foreach ($topVoucherDetails as $voucher): ?>
                                         <tr>
-                                            <td><?= htmlspecialchars($voucher['title']) ?></td>
+                                            <?php
+                                            $title = '';
+                                            if ($lang == 'en') {
+                                                if ($voucher['title'] != "") {
+                                                    $title = $voucher['title'];
+                                                } else if ($voucher['title_it'] != "") {
+                                                    $title = $voucher['title_it'];
+                                                } else if ($voucher['title_de'] != "") {
+                                                    $title = $voucher['title_de'];
+                                                }
+                                            } else if ($lang == 'it') {
+                                                if ($voucher['title_it'] != "") {
+                                                    $title = $voucher['title_it'];
+                                                } else if ($voucher['title'] != "") {
+                                                    $title = $voucher['title'];
+                                                } else if ($voucher['title_de'] != "") {
+                                                    $title = $voucher['title_de'];
+                                                }
+                                            } else {
+                                                if ($voucher['title_de'] != "") {
+                                                    $title = $voucher['title_de'];
+                                                } else if ($voucher['title'] != "") {
+                                                    $title = $voucher['title'];
+                                                } else if ($voucher['title_it'] != "") {
+                                                    $title = $voucher['title_it'];
+                                                }
+                                            }
+                                            ?>
+                                            <td><?= htmlspecialchars($title) ?></td>
                                             <td><?= $voucher['sales_count'] ?></td>
-                                            <td>$<?= number_format($voucher['total_revenue'] ?? 0, 2) ?></td>
+                                            <td>€<?= number_format($voucher['total_revenue'] ?? 0, 2) ?></td>
                                             <td><?= $voucher['total_redeemed'] ?? 0 ?></td>
                                         </tr>
                                     <?php endforeach; ?>

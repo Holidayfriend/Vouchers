@@ -1,0 +1,510 @@
+Debug Log - 2025-07-05 08:01:01
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:01:07
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:07:57
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:08:01
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:08:07
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:08:11
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:08:15
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:08:35
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:11:29
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:12:09
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month Gennaio: Sold: 0, Redeemed: 
+Month Febbraio: Sold: 0, Redeemed: 
+Month Marzo: Sold: 0, Redeemed: 
+Month Aprile: Sold: 0, Redeemed: 
+Month Maggio: Sold: 1, Redeemed: 0
+Month Giugno: Sold: 13, Redeemed: 0
+Month Luglio: Sold: 0, Redeemed: 
+Month Agosto: Sold: 0, Redeemed: 
+Month Settembre: Sold: 0, Redeemed: 
+Month Ottobre: Sold: 0, Redeemed: 
+Month Novembre: Sold: 0, Redeemed: 
+Month Dicembre: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:12:13
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:13:58
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:20:34
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:22:24
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28
+Debug Log - 2025-07-05 08:35:58
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 13
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: NO date, Sold: 1, Redeemed: 0, Total: 23
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 11.76
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: spa, Sold: 1, Redeemed: 0, Total: 12
+Voucher: wqwwq, Sold: 1, Redeemed: 0, Total: 23
+Total Sold: 14, Total Redeemed: 0, Redemption Rate: 0%
+Month January: Sold: 0, Redeemed: 
+Month February: Sold: 0, Redeemed: 
+Month March: Sold: 0, Redeemed: 
+Month April: Sold: 0, Redeemed: 
+Month May: Sold: 1, Redeemed: 0
+Month June: Sold: 13, Redeemed: 0
+Month July: Sold: 0, Redeemed: 
+Month August: Sold: 0, Redeemed: 
+Month September: Sold: 0, Redeemed: 
+Month October: Sold: 0, Redeemed: 
+Month November: Sold: 0, Redeemed: 
+Month December: Sold: 0, Redeemed: 
+Promo Code: ASDDF, Uses: 1, Discount: 1.00
+Promo Code: BIG, Uses: 3, Discount: 0.72
+Top Voucher: spa, Sales: 11, Revenue: 130.28
+Top Voucher: wqwwq, Sales: 2, Revenue: 36
+Top Voucher: NO date, Sales: 1, Revenue: 23
+Total Voucher Sales: 14, Total Voucher Revenue: 189.28

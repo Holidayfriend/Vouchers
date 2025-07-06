@@ -24,20 +24,53 @@ $currentYear = date('Y'); // 2025
 $selectedYear = isset($_GET['year']) ? $_GET['year'] : $currentYear;
 $selectedMonth = isset($_GET['month']) ? $_GET['month'] : 'all';
 $years = [$currentYear, $currentYear + 1];
-$months = [
-    '01' => 'January',
-    '02' => 'February',
-    '03' => 'March',
-    '04' => 'April',
-    '05' => 'May',
-    '06' => 'June',
-    '07' => 'July',
-    '08' => 'August',
-    '09' => 'September',
-    '10' => 'October',
-    '11' => 'November',
-    '12' => 'December'
-];
+if ($lang == 'de') {
+    $months = [
+        '01' => 'Januar',
+        '02' => 'Februar',
+        '03' => 'März',
+        '04' => 'April',
+        '05' => 'Mai',
+        '06' => 'Juni',
+        '07' => 'Juli',
+        '08' => 'August',
+        '09' => 'September',
+        '10' => 'Oktober',
+        '11' => 'November',
+        '12' => 'Dezember'
+    ];
+} else if ($lang == 'it') {
+    $months = [
+        '01' => 'Gennaio',
+        '02' => 'Febbraio',
+        '03' => 'Marzo',
+        '04' => 'Aprile',
+        '05' => 'Maggio',
+        '06' => 'Giugno',
+        '07' => 'Luglio',
+        '08' => 'Agosto',
+        '09' => 'Settembre',
+        '10' => 'Ottobre',
+        '11' => 'Novembre',
+        '12' => 'Dicembre'
+    ];
+} else {
+    $months = [
+        '01' => 'January',
+        '02' => 'February',
+        '03' => 'March',
+        '04' => 'April',
+        '05' => 'May',
+        '06' => 'June',
+        '07' => 'July',
+        '08' => 'August',
+        '09' => 'September',
+        '10' => 'October',
+        '11' => 'November',
+        '12' => 'December'
+    ];
+}
+
 
 // Determine days, weeks, and months passed
 $today = new DateTime(); // Current date (2025-05-29 03:46 AM PKT)
@@ -179,19 +212,19 @@ if ($selectedMonth == 'all') {
                     <div class="row page-titles mb-3   add_background">
                         <div class="col-lg-3 col-xlg-3 col-md-3">
                             <h6><strong><?= getTranslation('avg_daily_income', $lang) ?></strong></h6>
-                            <p>$<?= number_format($avgDailyIncome, 2) ?></p>
+                            <p>€<?= number_format($avgDailyIncome, 2) ?></p>
                         </div>
                         <div class="col-md-3">
                             <h6><strong><?= getTranslation('avg_weekly_income', $lang) ?></strong></h6>
-                            <p>$<?= number_format($avgWeeklyIncome, 2) ?></p>
+                            <p>€<?= number_format($avgWeeklyIncome, 2) ?></p>
                         </div>
                         <div class="col-md-3">
                             <h6><strong><?= getTranslation('per_month_income', $lang) ?></strong></h6>
-                            <p>$<?= number_format($perMonthIncome, 2) ?></p>
+                            <p>€<?= number_format($perMonthIncome, 2) ?></p>
                         </div>
                         <div class="col-md-3">
                             <h6><strong><?= getTranslation('total_income', $lang) ?></strong></h6>
-                            <p>$<?= number_format($totalIncome, 2) ?></p>
+                            <p>€<?= number_format($totalIncome, 2) ?></p>
                         </div>
                     </div>
                     <!-- Chart Display -->
@@ -250,7 +283,7 @@ if ($selectedMonth == 'all') {
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: '<?= getTranslation('revenue', $lang) ?> ($)'
+                                text: '<?= getTranslation('revenue', $lang) ?> (€)'
                             },
                             grid: {
                                 color: '#444'

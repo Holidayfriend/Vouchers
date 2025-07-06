@@ -52,7 +52,7 @@
                 <hr>
 
                 <li> <a id="promo-link" class="" href="hotel_revenue.php" aria-expanded="false">
-                        <i class="fas fa-dollar-sign"></i><span
+                        <i class="fas fa-euro-sign"></i><span
                             class="hide-menu"><?php echo getTranslation('revenue', $lang) ?></span></a>
                 </li>
 

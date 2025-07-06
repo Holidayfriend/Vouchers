@@ -83,7 +83,7 @@ $back = 'yes';
                         <div class="col-lg-6 col-xlg-6 col-md-6">
                             <div class="input-container">
                                 <label class="my-lable"><?= getTranslation('max_uses', $lang) ?>:</label>
-                                <input type="number" class="form-control input_background" id="max_uses" placeholder="0 for unlimited" min="0">
+                                <input type="number" class="form-control input_background" id="max_uses" placeholder="<?= getTranslation('0_for_unlimited', $lang) ?>" min="0">
                                 <div class="text-danger" id="errormaxuses"></div>
                             </div>
                         </div>

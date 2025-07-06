@@ -45,7 +45,7 @@ if ($statusFilter === 'active') {
 
 
 // Query to fetch a page of user records with search
-$sql = "SELECT a.*,b.title FROM `tbl_users_vouchers` as a INNER JOIN tbl_voucher as b On a.`voucher_id` = b.id Where a.`user_id` = $my_user_id_is AND a.`is_delete` = 0
+$sql = "SELECT a.*,b.title,b.title_it,b.title_de FROM `tbl_users_vouchers` as a INNER JOIN tbl_voucher as b On a.`voucher_id` = b.id Where a.`user_id` = $my_user_id_is AND a.`is_delete` = 0
  $searchCondition $filterCondition ORDER BY a.`id` DESC LIMIT $offset, $recordsPerPage ";
 $result = $conn->query($sql);
 $sql_mobile = $sql;
@@ -247,7 +247,33 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                                                 $email = $row['email'];
                                                 $phone = $row['phone'];
                                                 $country = $row['country'];
-                                                $title = $row['title'];
+                                                $title = '';
+                                                if ($lang == 'en') {
+
+                                                    if ($row['title'] != "") {
+                                                        $title = $row['title'];
+                                                    } else if ($row['title_it'] != "") {
+                                                        $title = $row['title_it'];
+                                                    } else if ($row['title_de'] != "") {
+                                                        $title = $row['title_de'];
+                                                    }
+                                                } else if ($lang == 'it') {
+                                                    if ($row['title_it'] != "") {
+                                                        $title = $row['title_it'];
+                                                    } else if ($row['title'] != "") {
+                                                        $title = $row['title'];
+                                                    } else if ($row['title_de'] != "") {
+                                                        $title = $row['title_de'];
+                                                    }
+                                                } else {
+                                                    if ($row['title_de'] != "") {
+                                                        $title = $row['title_de'];
+                                                    } else if ($row['title'] != "") {
+                                                        $title = $row['title'];
+                                                    } else if ($row['title_it'] != "") {
+                                                        $title = $row['title_it'];
+                                                    }
+                                                }
 
                                                 $amount = $row['amount'];
                                                 $description = $row['description'];
@@ -269,14 +295,11 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
 
 
                                                         $transaction_id = $row_c['transaction_id'];
-
-
-
                                                     }
                                                 }
 
 
-                                                ?>
+                                            ?>
                                                 <tr>
 
 
@@ -478,7 +501,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                                     $p_time = $row['p_time'];
 
                                     $id = $row['id'];
-                                    ?>
+                                ?>
                                     <div class="col-md-12 ">
 
 
@@ -499,21 +522,24 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                                                     <div class="col-12 mt-2">
                                                         <h6 class="dark_gray_color">
                                                             <b><?= getTranslation('name', $lang) ?>:</b>
-                                                            <?php echo $first_name . ' ' . $last_name; ?></h6>
+                                                            <?php echo $first_name . ' ' . $last_name; ?>
+                                                        </h6>
                                                     </div>
 
                                                     <!-- Email -->
                                                     <div class="col-12 mt-2">
                                                         <h6 class="dark_gray_color">
                                                             <b><?= getTranslation('email', $lang) ?>:</b>
-                                                            <?php echo $email; ?></h6>
+                                                            <?php echo $email; ?>
+                                                        </h6>
                                                     </div>
 
                                                     <!-- Title -->
                                                     <div class="col-12 mt-2">
                                                         <h6 class="dark_gray_color">
                                                             <b><?= getTranslation('voucher', $lang) ?>:</b>
-                                                            <?php echo $title; ?></h6>
+                                                            <?php echo $title; ?>
+                                                        </h6>
                                                     </div>
 
                                                     <!-- Amount -->
@@ -528,14 +554,16 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                                                     <div class="col-12 mt-2">
                                                         <h6 class="dark_gray_color">
                                                             <b><?= getTranslation('transaction_id', $lang) ?>:</b>
-                                                            <?php echo $transaction_id; ?></h6>
+                                                            <?php echo $transaction_id; ?>
+                                                        </h6>
                                                     </div>
 
                                                     <!-- Purchase Time -->
                                                     <div class="col-12 mt-2">
                                                         <h6 class="dark_gray_color">
                                                             <b><?= getTranslation('created_date', $lang) ?>:</b>
-                                                            <?php echo $p_time; ?></h6>
+                                                            <?php echo $p_time; ?>
+                                                        </h6>
                                                     </div>
 
 
@@ -705,7 +733,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
             if (div) {
                 if (div.classList.contains("selected")) {
                     div.classList.remove("selected");
-                    selectedIds = selectedIds.filter(function (item) {
+                    selectedIds = selectedIds.filter(function(item) {
                         return item !== id;
                     });
                 } else {
@@ -726,10 +754,10 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
             }
         }
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
 
-            $("#deleteButtonm").click(function () {
+            $("#deleteButtonm").click(function() {
                 if (selectedIds.length === 0) {
                     alert("Please select at least one row to delete.");
                     return;
@@ -738,8 +766,12 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                 $.ajax({
                     type: "POST",
                     url: "utill/del.php",
-                    data: { selectedRows: selectedIds, base: 'users_vouchers', base_name: 'id' },
-                    success: function (response) {
+                    data: {
+                        selectedRows: selectedIds,
+                        base: 'users_vouchers',
+                        base_name: 'id'
+                    },
+                    success: function(response) {
                         // Display the response message from del.php (e.g., success or error message)
                         // After successful deletion, refresh the page
 
@@ -759,7 +791,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
 
 
                     },
-                    error: function () {
+                    error: function() {
                         alert("An error occurred while deleting selected rows.");
                     }
                 });
@@ -767,12 +799,12 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
 
 
             // Select All functionality
-            $("#selectAll").change(function () {
+            $("#selectAll").change(function() {
                 var isChecked = $(this).prop("checked");
                 selectedIds = [];
 
                 if (isChecked) {
-                    $(".single_div_io").each(function () {
+                    $(".single_div_io").each(function() {
                         var id = $(this).attr("id");
                         $(this).addClass("selected");
                         selectedIds.push(id);
@@ -786,7 +818,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
             });
 
             // AJAX request to delete selected rows
-            $("#deleteButton").click(function () {
+            $("#deleteButton").click(function() {
                 if (selectedIds.length === 0) {
                     alert("Please select at least one row to delete.");
                     return;
@@ -795,8 +827,12 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                 $.ajax({
                     type: "POST",
                     url: "utill/del.php",
-                    data: { selectedRows: selectedIds, base: 'users_vouchers', base_name: 'id' },
-                    success: function (response) {
+                    data: {
+                        selectedRows: selectedIds,
+                        base: 'users_vouchers',
+                        base_name: 'id'
+                    },
+                    success: function(response) {
                         console.log(response);
                         Swal.fire({
                             title: 'Deleted',
@@ -810,7 +846,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                             }
                         });
                     },
-                    error: function () {
+                    error: function() {
                         alert("An error occurred while deleting selected rows.");
                     }
                 });
@@ -821,9 +857,6 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
 
 
     <script>
-
-
-
         function action(id, what, name) {
 
             var fd = new FormData();
@@ -839,7 +872,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                 data: fd,
                 processData: false,
                 contentType: false,
-                success: function (response) {
+                success: function(response) {
 
                     console.log(response);
 
@@ -855,8 +888,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                                 window.location.href = "city_benefit_holder.php";
                             }
                         });
-                    }
-                    else {
+                    } else {
                         Swal.fire({
                             type: 'error',
                             title: 'Oops...',
@@ -866,7 +898,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                     }
 
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.log(error);
                 },
             });
@@ -875,8 +907,8 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
 
 
         // JavaScript code for "Select All" checkbox functionality
-        $(document).ready(function () {
-            $("#selectAll").change(function () {
+        $(document).ready(function() {
+            $("#selectAll").change(function() {
                 $(".userCheckbox").prop("checked", $(this).prop("checked"));
 
                 console.log('in');
@@ -893,7 +925,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
             });
 
 
-            $(".userCheckbox").change(function () {
+            $(".userCheckbox").change(function() {
                 var selectedRows = $(".userCheckbox:checked").length;
                 if (selectedRows > 0) {
                     $("#deleteButton").show();
@@ -903,8 +935,8 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
             });
 
             // AJAX request to delete selected rows
-            $("#deleteButton").click(function () {
-                var selectedRows = $(".userCheckbox:checked").map(function () {
+            $("#deleteButton").click(function() {
+                var selectedRows = $(".userCheckbox:checked").map(function() {
                     return $(this).val();
                 }).get();
 
@@ -916,8 +948,12 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
                 $.ajax({
                     type: "POST",
                     url: "utill/del.php",
-                    data: { selectedRows: selectedRows, base: 'users_vouchers', base_name: 'id' },
-                    success: function (response) {
+                    data: {
+                        selectedRows: selectedRows,
+                        base: 'users_vouchers',
+                        base_name: 'id'
+                    },
+                    success: function(response) {
                         // Display the response message from del.php (e.g., success or error message)
                         // After successful deletion, refresh the page
 
@@ -940,7 +976,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
 
 
                     },
-                    error: function () {
+                    error: function() {
                         alert("An error occurred while deleting selected rows.");
                     }
                 });
@@ -948,23 +984,22 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
         });
     </script>
     <script>
-
         function url_redirect(url) {
             // Redirect the user to the specified URL
             window.location.href = url;
         }
+
         function reset() {
             // Redirect the user to the specified URL
             window.location.href = 'city_benefit_holder.php';
         }
-
     </script>
 
 
 
     <script>
         // JavaScript code for handling the search input
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Get the search input element
             var searchInput = $("#searchInput");
 
@@ -982,7 +1017,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
             }
 
             // Handle changes in the search input
-            searchInput.on("input", function () {
+            searchInput.on("input", function() {
                 var searchTerm = searchInput.val();
                 updateUrl(searchTerm);
 
@@ -1001,7 +1036,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
     </script>
     <script>
         // JavaScript code for applying and resetting filters
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Get the filter form elements
             var filterForm = $("#filterForm");
             var applyFilterButton = $("#applyFilter");
@@ -1009,7 +1044,7 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
             var clearCityFilterButton = $("#clearCityFilter");
 
             // Handle the "Apply Filter" button click
-            applyFilterButton.click(function () {
+            applyFilterButton.click(function() {
                 // Get the selected filter status
                 var filterStatus = filterForm.find('input[name="filterStatus"]:checked').val();
 
@@ -1028,14 +1063,14 @@ $totalPages = ceil($totalRecords / $recordsPerPage);
             });
 
             // Handle the "Reset Filter" button click
-            resetFilterButton.click(function () {
+            resetFilterButton.click(function() {
                 // Reset the filter by removing the "status" and "city" parameters from the URL
                 var url = window.location.href.split('?')[0]; // Get the current URL without query parameters
                 window.location.href = url; // Redirect to the URL without the filter status and city filter
             });
 
             // Handle the "Clear City Filter" button click
-            clearCityFilterButton.click(function () {
+            clearCityFilterButton.click(function() {
                 // Clear the city filter by removing the "city" parameter from the URL
                 var url = window.location.href.split('?')[0]; // Get the current URL without query parameters
                 var searchParams = new URLSearchParams(window.location.search);
